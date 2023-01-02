@@ -17,7 +17,7 @@ const Login1 = () => {
     const [logindata, setLoginData] = useState([])
     //const [error, setError] = useState(false);
     let navigate = useNavigate();
-
+    localStorage.setItem("email",username)
     const inputRef = useRef();
  
     useEffect(() => {
