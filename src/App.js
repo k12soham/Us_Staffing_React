@@ -17,6 +17,7 @@ import DemoLifecycle from './ExtraComponent/DemoLifecycle';
 import Forgetpassword from './ViewComponent1/Forgetpassword';
 import Forgetpass2 from './ViewComponent1/Forgetpass2';
 import Otp from './ViewComponent1/otp';
+import Abc from './ViewComponent1/abc';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/forgetpass2" element={<Forgetpass2 />}></Route>
           <Route path="/forgetpassword" element={<Forgetpassword />}></Route>
           <Route path="/otp" element={<Otp />}></Route>
+          <Route path="/abc" element={< Abc/>}></Route>
           {/* <Route path="/forgot_pass1" element={<Forgetpassword />}></Route> */}
           {/* <Route path="/DemoLifecycle" element={<DemoLifecycle />}></Route> */}
         </Routes>
