@@ -457,7 +457,7 @@ const AdminDash1 = () => {
         return closureList.map(cls => {
 
             var dd = new Date(cls.clo_date);
-            console.log("Employees closure list  ash : ", JSON.stringify(closureList.length));
+           // console.log("Employees closure list  ash : ", JSON.stringify(closureList.length));
 
             return (
 

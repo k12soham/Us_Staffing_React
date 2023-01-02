@@ -15,6 +15,8 @@ import ModalWithCSS from './ViewComponent1/ModalWithCSS';
 import UpdateProfile from './ViewComponent1/UpdateProfile';
 import DemoLifecycle from './ExtraComponent/DemoLifecycle';
 import Forgetpassword from './ViewComponent1/Forgetpassword';
+import Forgetpass2 from './ViewComponent1/Forgetpass2';
+import Otp from './ViewComponent1/otp';
 
 function App() {
   return (
@@ -44,9 +46,10 @@ function App() {
           <Route path="/modal_with_css" element={<ModalWithCSS />}></Route>
 
           <Route path="/update_profile" element={<UpdateProfile />}></Route>
-
-          
-          <Route path="/forgot_pass1" element={<Forgetpassword />}></Route>
+          <Route path="/forgetpass2" element={<Forgetpass2 />}></Route>
+          <Route path="/forgetpassword" element={<Forgetpassword />}></Route>
+          <Route path="/otp" element={<Otp />}></Route>
+          {/* <Route path="/forgot_pass1" element={<Forgetpassword />}></Route> */}
           {/* <Route path="/DemoLifecycle" element={<DemoLifecycle />}></Route> */}
         </Routes>
       </Router>

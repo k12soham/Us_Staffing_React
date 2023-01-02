@@ -30,7 +30,7 @@
 import { type } from "@testing-library/user-event/dist/type";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { Line, Circle } from 'rc-progress';
+
  
  const Forgetpass2 = () => {
    const [name, setName] = useState("");
