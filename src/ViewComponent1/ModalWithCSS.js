@@ -9,9 +9,9 @@ class ModalWithCSS extends React.Component {
     super();
     this.state = {
       showModal: false,
-    // navigate: useNavigate()
+      // navigate: useNavigate()
     };
-  //  let navigate = useNavigate();
+    //  let navigate = useNavigate();
     this.handleOpenModal = this.handleOpenModal.bind(this);
     // this.handleCloseModal = this.handleCloseModal.bind(this);
   }
@@ -26,8 +26,8 @@ class ModalWithCSS extends React.Component {
   }
 
   handleClose() {
-   // let navigate = useNavigate();
-   // navigate("/login");
+    // let navigate = useNavigate();
+    // navigate("/login");
     //this.props.navigate("/login");
 
     history.push("/admin_dashboard1");
@@ -51,8 +51,7 @@ class ModalWithCSS extends React.Component {
 
       <div>
         <button className="btn btn-primary w-100 theme-btn mx-auto"
-                            style={{ color: 'white', margin:'15px' }} onClick={this.handleOpenModal}>View Profile</button>
-        {/* <div className='row' style={{ margin: '0px', padding: '0px', textAlign: 'center' }}> */}
+          style={{ color: 'white', margin: '15px' }} onClick={this.handleOpenModal}>View Profile</button>
         <div className="col-12 col-md-7 col-lg-6 auth-main-col text-center">
 
           <ReactModal
@@ -62,57 +61,44 @@ class ModalWithCSS extends React.Component {
             className="Modal"
           // overlayClassName="Overlay"
           >
-         <div style={{textAlign:"right"}}>
-          
-                                                <button 
-                                                    type="submit"
-                                                     className="btn btn-danger w-150 theme-btn mx-auto"
-                                                    onClick={this.handleClose}
-                                                >
-                                                    Close
-                                                </button>
-                                                </div>
-          {/* <button  style={{ margin: '0px', textAlign: 'right' }}><b>Close</b></button>                              */}
+            <div style={{ textAlign: "right" }}>
+
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={this.handleClose}></button>
+
+            </div>
+
             <p style={{ margin: '0px', padding: '0px', textAlign: 'center' }}><b>{empName}</b></p>
             <p style={{ textAlign: 'center' }}>{empMail}</p><hr></hr>
-           
-
 
             {/* <p style={{ margin: '0px', padding: '0px' }}>Modal text!{empID}</p> */}
 
-            {/* <button className="btn btn-primary w-20 theme-btn mx-auto"style={{marginRight:'5px', margin:'2px'}} to="/login" onClick={this.handleCloseModal}>Update Profile</button> */}
-            {/* <button className="btn btn-primary w-20 theme-btn mx-auto" onClick={this.logout}>Logout</button> */}
-
             <div className="text-center">
-                                        <div className='row'>
-                                            <div className='col-1'></div>
+              <div className='row'>
+                <div className='col-1'></div>
 
-                                          
+                <div className='col-5'>
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-150 theme-btn mx-auto"
+                    onClick={this.handleUpdateProfile}
+                  >
+                    Update Profile
+                  </button>
+                </div>
+                <div className='col-5'>
+                  <button
+                    type="reset"
+                    className="btn btn-secondary w-100 theme-btn mx-auto"
+                    onClick={this.logout}
+                  >
+                    Logout
+                  </button>
 
+                </div>
+                <div className='col-1'></div>
+              </div>
 
-                                            <div className='col-5'>
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary w-150 theme-btn mx-auto"
-                                                    onClick={this.handleUpdateProfile}
-                                                >
-                                                    Update Profile
-                                                </button>
-                                            </div>
-                                            <div className='col-5'>
-                                                <button
-                                                    type="reset"
-                                                    className="btn btn-secondary w-100 theme-btn mx-auto"
-                                                    onClick={this.logout}
-                                                >
-                                                    Logout
-                                                </button>
-
-                                            </div>
-                                            <div className='col-1'></div>
-                                        </div>
-
-                                    </div>
+            </div>
 
           </ReactModal>
           {/* ---------------------------------------------------------------------------------- */}

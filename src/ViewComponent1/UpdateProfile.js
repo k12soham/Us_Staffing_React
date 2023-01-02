@@ -138,7 +138,6 @@ class UpdateProfile extends React.Component {
     validate() {
         console.log("Current pass: " + this.state.currentPassword + " newPass : " + this.state.newPassword + "  confirmPass: " + this.state.confirmPassword);
 
-
         let input = this.state.input;
         let errors = {};
         let isValid = true;
