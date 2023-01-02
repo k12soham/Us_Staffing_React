@@ -27,6 +27,7 @@ import axios from "axios";
 import base_url from "../api/bootapi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { regexLiteral } from "@babel/types";
 
 
 const Forgetpassword = () => {
@@ -76,33 +77,33 @@ const Forgetpassword = () => {
     // --------------------------------------- new password validation-------------------------------------------------------
     if (password == null) {
       isValid = false;
-      setPassError("New Password field is required");
-      // errors["emp_name"] = "Please enter new password";
+      setPassError("Field is required");
+    
     }
 
-    if (password !== null) {
+     if (password !== null) {
 
-      var pattern = new RegExp(/^[^\s][a-zA-Z\s]+[^\s]$/);
+      var pattern = new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
       if (!pattern.test(password)) {
         isValid = false;
         setPassError("Password must contain at least one number, one special character (?!,@#$), one upper and lower case letter, and at least 6 characters.")
-        errors["emp_name"] = "Please enter only characters.";
+     
       }
     }
     // --------------------------------------- confirm password validation-------------------------------------------------------
     if (password1 == null) {
       isValid = false;
-      setPassError("New Password field is required");
-      // errors["emp_name"] = "Please enter new password";
+      setPass1Error("Field is required");
+
     }
 
-    if (password1 !== null) {
+     if (password1 !== null) {
 
-      var pattern = new RegExp(/^[^\s][a-zA-Z\s]+[^\s]$/);
-      if (!pattern.test(password)) {
+      var pattern = new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
+      if (!pattern.test(password1)) {
         isValid = false;
-        setPassError("Password must contain at least one number, one special character (?!,@#$), one upper and lower case letter, and at least 6 characters.")
-        errors["emp_name"] = "Please enter only characters.";
+        setPass1Error("Password must contain at least one number, one special character (?!,@#$), one upper and lower case letter, and at least 6 characters.")
+       
       }
     }
     return isValid;
@@ -111,26 +112,27 @@ const Forgetpassword = () => {
 
   const register = (e) => {
     e.preventDefault();
-    alert("submitting data");
-
+ 
     // const validate = validateRegister();
     const validate = validation1();
+   
 
     if (validate) {
       setValidate({});
-
       const d1 = password;
       const d2 = password1;
 
       if (d1 == d2) {
-        alert("same")
-        // postDataToServer(email, d1);
+       // alert("same")
+         postDataToServer(email, d1);
+         alert("You are registered successfully!");
       }
       else {
-        alert("not same")
+        alert("Password doesn't match")
       }
-      //  postDataToServer( d3);
-      //  alert("You are registered successfully!");
+
+    //   postDataToServer(email, d1);
+  
       setPassword(null);
       setPassword1(null);
     }
@@ -193,7 +195,7 @@ const Forgetpassword = () => {
     <div className="row g-0 auth-wrapper">
       <div className="col-12 col-md-5 col-lg-6 h-100 ">
 
-        <img src="usa.png"></img>
+      <img src="usa.png" width="670" height="657"></img>
       </div>
 
       <div className="col-12 col-md-7 col-lg-6 auth-main-col text-center">
@@ -300,7 +302,7 @@ const Forgetpassword = () => {
                     </div> */}
 
                   </div>
-                  <div className="text-danger">{passError}</div>
+                  <div className="text-danger">{pass1Error}</div>
                   <div className="text-danger">{passNotMatch}</div>
                   <div className="text-success">{passMatch}</div>
 
