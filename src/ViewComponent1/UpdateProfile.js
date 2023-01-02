@@ -129,7 +129,7 @@ class UpdateProfile extends React.Component {
                 // let empName = localStorage.getItem('empName');
             },
             (error) => {
-                alert("The current password doesn't valid!");
+                alert("Please enter correct current password!");
                 window.location.reload();
             }
         )

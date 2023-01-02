@@ -215,7 +215,9 @@ const Login1 = () => {
                                                 : ""}
                                         </div>
                                     </div>
-
+                                    <Link className="text-link" to="/forgetpass2" >
+                                    Forget Password{" "}
+                                </Link>
                                 </div>
                                 <div className="text-center">
                                     <button
