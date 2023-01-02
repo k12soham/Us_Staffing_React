@@ -23,6 +23,7 @@ const ModalDemo= ()=>{
   }
 
  function handleOpenModal() {
+  alert("eeeeeee")
     // setState({ showModal: true });
     setShowModal(true);
   }
