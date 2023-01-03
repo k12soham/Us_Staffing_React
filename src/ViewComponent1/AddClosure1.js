@@ -13,20 +13,218 @@ class AddClosure1 extends React.Component {
 
     componentDidMount() {
         this.refInput.focus();
-      }
+    }
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
             input: {},
+            // errors: [0],
             errors: {},
             empID: '',
         };
-        
+        console.log("Value of errors " + JSON.stringify(this.state.errors));
+        console.log("Value of input[req] " + this.state.input["req"]);
+        console.log("Value of Err length " + this.state.errors.length);
+       
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.keyUpHandlerReq = this.keyUpHandlerReq.bind(this);
+        this.keyUpHandlerSub = this.keyUpHandlerSub.bind(this);
+        this.keyUpHandlerFirst = this.keyUpHandlerFirst.bind(this);
+        this.keyUpHandlerSecond = this.keyUpHandlerSecond.bind(this);
+        this.keyUpHandlerClosure = this.keyUpHandlerClosure.bind(this);
 
+    }
+
+    keyUpHandlerReq(e) {
+        let req = e.target.value;
+        let errors = {};
+        let new_input = this.state.input
+
+        if (req < 1) {
+            errors["req"] = "Atleast 1 requirement is needed";
+        } else {
+            this.setState({
+                input: new_input
+            })
+            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+        }
+
+        this.setState({
+            errors: errors
+        });
+
+        console.log("error: " + JSON.stringify(this.state.errors));
+        console.log("Value of Err length " + this.state.errors.length);
+    }
+
+    keyUpHandlerSub(e) {
+        const objlen = this.state.errors
+        let sub = e.target.value;
+        console.log("sub : " + sub);
+        let errors = {};
+        console.log("error: " + JSON.stringify(this.state.errors));
+        console.log("Value of Err length " + Object.keys(objlen).length);
+
+        if ((Object.keys(objlen).length) == 0) {
+            // alert(" null");
+
+
+            let new_input = this.state.input
+            console.log("After keyUp val are ##############################: " + JSON.stringify(this.state.input));
+
+            console.log("Sub data : " + JSON.stringify(this.state.input));
+
+            console.log("req : " + new_input["req"] + " sub: " + new_input["sub"]);
+
+            if ((new_input["sub"]) > 999) {
+                errors["sub"] = "Only 3 digit number is accepted!";
+            } else {
+                this.setState({
+                    input: new_input
+                })
+                console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+            }
+
+            this.setState({
+                errors: errors
+            });
+
+        }
+    }
+
+    keyUpHandlerFirst(e) {
+
+        let first = e.target.value;
+        let errors = {};
+        let new_input = this.state.input
+
+        let sub = new_input["sub"];
+        let first1 = new_input["first"];
+
+        console.log("sub = "+sub+ " first1 = "+ first1);
+
+        console.log("let error :"+ JSON.stringify(errors));
+
+        const objlen = this.state.errors
+       
+        if ((new_input["first"]) < 0) {
+            errors["first"] = "Negative number not allowed";
+        }
+        else if (sub < first1) {
+            errors["first"] = "Please enter valid number for first interview-keup";
+            console.log("let error in if statement :"+ JSON.stringify(errors));
+        }
+        else {
+            this.setState({
+                input: new_input
+            })
+            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+            console.log("let error in Else :"+ JSON.stringify(errors));
+        } 
+
+        this.setState({
+            errors: errors
+        });
+    }
+
+    // keyUpHandlerFirst(e) {
+
+    //     let first = e.target.value;
+    //     let errors = {};
+    //     let new_input = this.state.input
+
+    //     console.log("let error :"+ JSON.stringify(errors));
+
+    //     const objlen = this.state.errors
+       
+    //     if ((new_input["first"]) < 0) {
+    //         errors["first"] = "Negative number not allowed";
+    //     }
+
+
+    //     else {
+
+    //         console.log("first: " + (new_input["first"]) + " Sub : " + (new_input["sub"]));
+
+    //         if ((new_input["first"]) > (new_input["sub"])) {
+    //             errors["first"] = "Please enter valid number for first interview-keup";
+    //             console.log("let error in if statement :"+ JSON.stringify(errors));
+    //         }
+
+    //         else {
+    //             this.setState({
+    //                 input: new_input
+    //             })
+    //             console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+    //             console.log("let error in Else :"+ JSON.stringify(errors));
+    //         }           
+    //         // }
+    //     }
+
+    //     this.setState({
+    //         errors: errors
+    //     });
+    // }
+
+    keyUpHandlerSecond(e) {
+        console.log()
+        let second = e.target.value;
+        let errors = {};
+        let new_input = this.state.input
+        const objlen = this.state.errors
+        // if ((Object.keys(objlen).length) == 0) {
+        // if ((new_input["second"]) > (new_input["first"]) || (new_input["closure"]) > (new_input["second"])) {
+
+        console.log("Second: " + (new_input["second"]) + " First : " + (new_input["first"]));
+
+        if ((new_input["second"]) > (new_input["first"])) {
+            errors["second"] = "Please enter valid number for second interview";
+        }
+        else if ((new_input["second"]) < 0) {
+            errors["second"] = "Negative number not allowed";
+        }
+        else {
+            this.setState({
+                input: new_input
+            })
+            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+        }
+        this.setState({
+            errors: errors
+        });
+        // }
+    }
+
+    keyUpHandlerClosure(e) {
+        let closure = e.target.value;
+        let errors = {};
+        let new_input = this.state.input
+
+
+        const objlen = this.state.errors
+        // if ((Object.keys(objlen).length) == 0) {
+
+        console.log("Closure: " + (new_input["closure"]) + " Second : " + (new_input["second"]));
+
+        if ((new_input["closure"]) > (new_input["second"])) {
+            errors["closure"] = "Please enter valid number for ";
+        }
+        else if ((new_input["closure"]) < 0) {
+            errors["closure"] = "Negative number not allowed";
+        }
+        else {
+            this.setState({
+                input: new_input
+            })
+            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+        }
+        this.setState({
+            errors: errors
+        });
+        // }
     }
 
     resetForm = () => {
@@ -83,35 +281,35 @@ class AddClosure1 extends React.Component {
         let d4 = data["second"];
         let d5 = data["closure"];
 
-     /*   if (d2 < d3) {
-            alert("Please Enter valid number for first interview")
-            alert(d2)
-            alert(d3)
-        }
-            */
-            axios.post(`${base_url}/add_cls?req=${d1}&sub=${d2}&first=${d3}&second=${d4}&closure=${d5}&empid=${z}`).then(
-                // addEmp?empName=Admin&Username=admin@gmail.com&Password=Admin@1234
-                (response) => {
-                    toast.success("Requirement added successfully!",
-                        { position: "top-right" }
-                    );
-                },
-                (error) => {
-                    console.log(error);
-                    console.log("Error");
-                    alert("Please enter valid details.")
-                }
-            );
+        /*   if (d2 < d3) {
+               alert("Please Enter valid number for first interview")
+               alert(d2)
+               alert(d3)
+           }
+               */
+        axios.post(`${base_url}/add_cls?req=${d1}&sub=${d2}&first=${d3}&second=${d4}&closure=${d5}&empid=${z}`).then(
+            // addEmp?empName=Admin&Username=admin@gmail.com&Password=Admin@1234
+            (response) => {
+                toast.success("Requirement added successfully!",
+                    { position: "top-right" }
+                );
+            },
+            (error) => {
+                console.log(error);
+                console.log("Error");
+                alert("Please enter valid details.")
+            }
+        );
 
-            let inputs = {};
-            inputs["req"] = undefined;
-            inputs["sub"] = undefined;
-            inputs["first"] = undefined;
-            inputs["second"] = undefined;
-            inputs["closure"] = undefined;
+        let inputs = {};
+        inputs["req"] = undefined;
+        inputs["sub"] = undefined;
+        inputs["first"] = undefined;
+        inputs["second"] = undefined;
+        inputs["closure"] = undefined;
 
-            this.setState({ input: inputs });
-        }
+        this.setState({ input: inputs });
+    }
     // }
     // --------------------------------------------Validation Code ----------------------------------------------------------
 
@@ -121,11 +319,11 @@ class AddClosure1 extends React.Component {
         let errors = {};
         let isValid = true;
 
-        console.log("Req"+input["req"]);
-        console.log("Sub"+input["sub"]);
-        console.log("First"+input["first"]);
-        console.log("Second"+input["second"]);
-        console.log("Closure"+input["closure"]);
+        console.log("Req" + input["req"]);
+        console.log("Sub" + input["sub"]);
+        console.log("First" + input["first"]);
+        console.log("Second" + input["second"]);
+        console.log("Closure" + input["closure"]);
 
         if ((!input["req"])) {
             isValid = false;
@@ -135,7 +333,7 @@ class AddClosure1 extends React.Component {
             isValid = false;
             errors["req"] = "Atleast 1 requirement is needed";
         }
-        if ((typeof input["req"] !== "undefined")) {
+        if ((typeof input["req"] !== undefined)) {
             // alert("regex valid cheked & req= "+input["req"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -153,7 +351,7 @@ class AddClosure1 extends React.Component {
             isValid = false;
             errors["sub"] = "Enter positive number";
         }
-        if ((typeof input["sub"] !== "undefined")) {
+        if ((typeof input["sub"] !== undefined)) {
             // alert("regex valid cheked for sub"+input["sub"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -171,7 +369,7 @@ class AddClosure1 extends React.Component {
             isValid = false;
             errors["first"] = "Enter positive number";
         }
-        if ((typeof input["first"] !== "undefined")) {
+        if ((typeof input["first"] !== undefined)) {
             // alert("regex valid cheked for first, first= "+input["first"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -181,14 +379,14 @@ class AddClosure1 extends React.Component {
             }
         }
 
-        if((input["first"]) > (input["sub"]))
+        if ((input["first"]) > (input["sub"]))
         // if((input["second"])<(input["closure"]))
         {
             // alert("compare 1st > sub");
             isValid = false;
             errors["first"] = "Enter valid number for first interview";
         }
-        
+
         // ----------------------------------------------------------------------------------------------------------------------
         if (!input["second"]) {
             isValid = false;
@@ -198,7 +396,7 @@ class AddClosure1 extends React.Component {
             isValid = false;
             errors["second"] = "Enter positive number";
         }
-        if ((typeof input["second"] !== "undefined")) {
+        if ((typeof input["second"] !== undefined)) {
             // alert("regex valid cheked for second "+input["second"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -208,8 +406,7 @@ class AddClosure1 extends React.Component {
             }
         }
 
-        if((input["second"])>(input["first"]))
-        {
+        if ((input["second"]) > (input["first"])) {
             // alert("compare 2nd > 1st");
             isValid = false;
             errors["second"] = "Enter valid number for second interview";
@@ -219,7 +416,7 @@ class AddClosure1 extends React.Component {
             isValid = false;
             errors["closure"] = "This field is required";
         }
-        
+
         if (input["closure"] < 0) {
             isValid = false;
             errors["closure"] = "Enter positive number";
@@ -233,8 +430,7 @@ class AddClosure1 extends React.Component {
                 errors["closure"] = "Only 3 digit number is accepted!";
             }
         }
-        if((input["closure"]) > (input["second"]))
-        {
+        if ((input["closure"]) > (input["second"])) {
             // alert("compare cls >2nd");
             isValid = false;
             errors["closure"] = "Enter valid number for closure";
@@ -280,12 +476,14 @@ class AddClosure1 extends React.Component {
                                     <div class="form-group">
                                         <label for="req"><b>Requirements worked on:</b></label>
                                         <input
-                                            
+
                                             ref={(input) => { this.refInput = input; }}
                                             type="number"
                                             name="req"
                                             value={this.state.input.req}
                                             onChange={this.handleChange}
+                                            onKeyUp={this.keyUpHandlerReq}
+
                                             class="form-control"
                                             placeholder="Requirements"
                                             id="req" />
@@ -303,6 +501,7 @@ class AddClosure1 extends React.Component {
                                             value={this.state.input.sub}
 
                                             onChange={this.handleChange}
+                                            onKeyUp={this.keyUpHandlerSub}
                                             placeholder="Submissions"
 
                                             class="form-control" />
@@ -319,6 +518,7 @@ class AddClosure1 extends React.Component {
                                             name="first"
                                             value={this.state.input.first}
                                             onChange={this.handleChange}
+                                            onKeyUp={this.keyUpHandlerFirst}
                                             placeholder="First Interview"
 
                                             class="form-control" />
@@ -334,6 +534,7 @@ class AddClosure1 extends React.Component {
                                             name="second"
                                             value={this.state.input.second}
                                             onChange={this.handleChange}
+                                            onKeyUp={this.keyUpHandlerSecond}
                                             placeholder="Second Interview"
 
                                             class="form-control" />
@@ -349,6 +550,7 @@ class AddClosure1 extends React.Component {
                                             name="closure"
                                             value={this.state.input.closure}
                                             onChange={this.handleChange}
+                                            onKeyUp={this.keyUpHandlerClosure}
                                             placeholder="Closure"
 
                                             class="form-control" />
