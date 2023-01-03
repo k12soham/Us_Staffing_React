@@ -30,7 +30,7 @@ class ModalWithCSS extends React.Component {
     // navigate("/login");
     //this.props.navigate("/login");
 
-    history.push("/admin_dashboard1");
+   // history.push("/admin_dashboard1");
     window.location.reload();
   }
 

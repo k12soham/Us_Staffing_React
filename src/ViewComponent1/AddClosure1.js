@@ -24,10 +24,10 @@ class AddClosure1 extends React.Component {
             errors: {},
             empID: '',
         };
-
         console.log("Value of errors " + JSON.stringify(this.state.errors));
         console.log("Value of input[req] " + this.state.input["req"]);
         console.log("Value of Err length " + this.state.errors.length);
+       
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.keyUpHandlerReq = this.keyUpHandlerReq.bind(this);
