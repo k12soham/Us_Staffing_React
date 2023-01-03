@@ -23,7 +23,7 @@ class AddClosure1 extends React.Component {
             errors: {},
             empID: '',
         };
-
+        
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
