@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 import { toast } from "react-toastify";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './ResponseVal';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+// import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 const AdminDash1 = () => {
@@ -684,7 +684,7 @@ const AdminDash1 = () => {
                     {isShownError && <EmptyDataErrorMsg />}
                 </div>
             </div>
-            <NotificationContainer />
+            {/* <NotificationContainer /> */}
         </div>
     ) : (
         history.push("/"),
