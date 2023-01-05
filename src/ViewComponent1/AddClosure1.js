@@ -20,25 +20,31 @@ class AddClosure1 extends React.Component {
 
         this.state = {
             input: {},
-            // errors: [0],
             errors: {},
             empID: '',
+            // add1:true,
+            // add2:true
+
+         
         };
-        console.log("Value of errors " + JSON.stringify(this.state.errors));
-        console.log("Value of input[req] " + this.state.input["req"]);
-        console.log("Value of Err length " + this.state.errors.length);
+      //  console.log("Value of errors " + JSON.stringify(this.state.errors));
+       // console.log("Value of input[req] " + this.state.input["req"]);
+       // console.log("Value of Err length " + this.state.errors.length);
+
+       console.log(this.state.add1);
+       console.log(this.state.add2);
        
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.keyUpHandlerReq = this.keyUpHandlerReq.bind(this);
+        /*this.keyUpHandlerReq = this.keyUpHandlerReq.bind(this);
         this.keyUpHandlerSub = this.keyUpHandlerSub.bind(this);
         this.keyUpHandlerFirst = this.keyUpHandlerFirst.bind(this);
         this.keyUpHandlerSecond = this.keyUpHandlerSecond.bind(this);
-        this.keyUpHandlerClosure = this.keyUpHandlerClosure.bind(this);
+        this.keyUpHandlerClosure = this.keyUpHandlerClosure.bind(this);*/
 
     }
 
-    keyUpHandlerReq(e) {
+   /* keyUpHandlerReq(e) {
         let req = e.target.value;
         let errors = {};
         let new_input = this.state.input
@@ -225,7 +231,7 @@ class AddClosure1 extends React.Component {
             errors: errors
         });
         // }
-    }
+    }*/
 
     resetForm = () => {
         // alert("Clear");
@@ -318,22 +324,28 @@ class AddClosure1 extends React.Component {
         let input = this.state.input;
         let errors = {};
         let isValid = true;
+        let addNew1=true;
+        let addNew2=true;
+       // console.log(addNew1);
+       // console.log(addNew2);
 
-        console.log("Req" + input["req"]);
-        console.log("Sub" + input["sub"]);
-        console.log("First" + input["first"]);
-        console.log("Second" + input["second"]);
-        console.log("Closure" + input["closure"]);
+        console.log("Req " + input["req"]);
+        console.log("Sub " + input["sub"]);
+        console.log("First " + input["first"]);
+        console.log("Second " + input["second"]);
+        console.log("Closure " + input["closure"]);
 
+      
         if ((!input["req"])) {
             isValid = false;
             errors["req"] = "This field is required";
         }
-        if (input["req"] < 1) {
+       
+       else if (input["req"] < 1) {
             isValid = false;
             errors["req"] = "Atleast 1 requirement is needed";
         }
-        if ((typeof input["req"] !== undefined)) {
+        else if ((typeof input["req"] !== undefined)) {
             // alert("regex valid cheked & req= "+input["req"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -347,15 +359,15 @@ class AddClosure1 extends React.Component {
             isValid = false;
             errors["sub"] = "This field is required";
         }
-        if (input["sub"] < 1) {
+       else if (input["sub"] < 0) {
             isValid = false;
             errors["sub"] = "Enter positive number";
         }
-        if ((typeof input["sub"] !== undefined)) {
+       else if ((typeof input["sub"] !== undefined)) {
             // alert("regex valid cheked for sub"+input["sub"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
-            if (!pattern.test(input["sub"])) {
+             if (!pattern.test(input["sub"])) {
                 isValid = false;
                 errors["sub"] = "Only 3 digit number is accepted!";
             }
@@ -365,11 +377,12 @@ class AddClosure1 extends React.Component {
             isValid = false;
             errors["first"] = "This field is required";
         }
-        if (input["first"] < 0) {
+       else if (input["first"] < 0 ) {
+   
             isValid = false;
             errors["first"] = "Enter positive number";
         }
-        if ((typeof input["first"] !== undefined)) {
+      else  if ((typeof input["first"] !== undefined)) {
             // alert("regex valid cheked for first, first= "+input["first"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -379,24 +392,32 @@ class AddClosure1 extends React.Component {
             }
         }
 
-        if ((input["first"]) > (input["sub"]))
-        // if((input["second"])<(input["closure"]))
+         if ((input["first"]) > (input["sub"]))
         {
-            // alert("compare 1st > sub");
+            
             isValid = false;
             errors["first"] = "Enter valid number for first interview";
         }
+
+        // if (((input["first"]) <=9) && this.state.add1) {
+        //     this.setState({add1:false})
+        //  //   console.log(addNew1)
+        //     input["first"]=0+ input["first"]
+            
+        // }
+
+       
 
         // ----------------------------------------------------------------------------------------------------------------------
         if (!input["second"]) {
             isValid = false;
             errors["second"] = "This field is required";
         }
-        if (input["second"] < 0) {
+        else if (input["second"] < 0) {
             isValid = false;
             errors["second"] = "Enter positive number";
         }
-        if ((typeof input["second"] !== undefined)) {
+        else if ((typeof input["second"] !== undefined)) {
             // alert("regex valid cheked for second "+input["second"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -406,22 +427,33 @@ class AddClosure1 extends React.Component {
             }
         }
 
-        if ((input["second"]) > (input["first"])) {
+         if (input["second"] > input["first"]) {
             // alert("compare 2nd > 1st");
             isValid = false;
             errors["second"] = "Enter valid number for second interview";
         }
+
+        
+        // if (((input["second"]) <=9 )&& this.state.add2) {
+        //   //  addNew2 = false;
+        //   this.setState({add2:false})
+        //     input["second"]= 0+ input["second"]
+           
+        // }
+
+        
+
         // ----------------------------------------------------------------------------------------------------------------------
         if (!input["closure"]) {
             isValid = false;
             errors["closure"] = "This field is required";
         }
 
-        if (input["closure"] < 0) {
+        else if (input["closure"] < 0) {
             isValid = false;
             errors["closure"] = "Enter positive number";
         }
-        if ((typeof input["closure"] !== "undefined")) {
+        else if ((typeof input["closure"] !== "undefined")) {
             // alert("regex valid cheked for cls "+input["closure"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -430,12 +462,45 @@ class AddClosure1 extends React.Component {
                 errors["closure"] = "Only 3 digit number is accepted!";
             }
         }
-        if ((input["closure"]) > (input["second"])) {
+         if ((input["closure"]) > (input["second"])) {
             // alert("compare cls >2nd");
             isValid = false;
             errors["closure"] = "Enter valid number for closure";
         }
         // ---------------------------------------------------------------------------------------------------------------------
+      
+
+
+                ////////////////////////////
+    
+      /*  if ((input["req"]) > new RegExp('\d') && (input["req"]) <=9 ) {
+            input["req"]=0+ input["req"]
+         
+           
+        }
+
+        if ((input["sub"]) <=9) {
+            input["sub"]=0+ input["sub"]
+     
+        }
+
+        if ((input["first"]) <=9) {
+            input["first"]=0+ input["first"]
+          
+        }
+
+        if ((input["second"]) <=9) {
+            input["second"]=0+ input["second"]
+          
+        }
+
+        if ((input["closure"]) <=9) {
+            input["closure"]=0+ input["closure"]
+          
+        }
+*/
+
+
         this.setState({
             errors: errors
         });
