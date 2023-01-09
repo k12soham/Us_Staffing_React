@@ -181,8 +181,16 @@ const AdminDash1 = () => {
     }
 
     const postGetDataByCate = (cate) => {
-        axios.get(`${base_url}/getRecordByCate?category=${cate}`).then(json => setClosureList(json.data))
+        // axios.get(`${base_url}/getRecordByCate?category=${cate}`).then(json => setClosureList(json.data))
         // localhost:8082/get_cls_by_Quarterly?empid=3&category=Quarterly
+        axios.get(`${base_url}/getRecordByCate?category=${cate}`)
+        .then(
+            json => setClosureList(json.data),
+        )
+        .catch(error => {
+            setIsShownError(true);
+            setClosureList([]);
+        })
     }
     // ---------------------------------------------End Get data by category-------------------------------------------
 

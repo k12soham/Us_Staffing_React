@@ -47,7 +47,7 @@ const Forgetpassword = () => {
 
   let navigate = useNavigate();
   let email = localStorage.getItem("email");
-
+  console.log("email : "+ email);
 
   //    const useEffect=() => {
   //         axios.get(`${base_url}/reset_password`).then(
@@ -114,8 +114,7 @@ const Forgetpassword = () => {
     e.preventDefault();
  
     // const validate = validateRegister();
-    const validate = validation1();
-   
+    const validate = validation1();   
 
     if (validate) {
       setValidate({});
@@ -125,19 +124,16 @@ const Forgetpassword = () => {
       if (d1 == d2) {
        // alert("same")
          postDataToServer(email, d1);
-         alert("You are registered successfully!");
+        //  alert("You are registered successfully!");
       }
       else {
-        alert("Password doesn't match")
+        alert("Password doesn't match");
       }
-
     //   postDataToServer(email, d1);
   
       setPassword(null);
       setPassword1(null);
     }
-
-
 
     e.target.reset();
 
@@ -161,6 +157,8 @@ const Forgetpassword = () => {
 
   const postDataToServer = (d1, d2) => {
 
+    console.log("email: "+ d1 + " new pass : "+d2);
+
     axios.post(`${base_url}/forgetpass?username=${d1}&password=${d2}`).then(
       (response) => {
         // console.log(response);
@@ -169,6 +167,7 @@ const Forgetpassword = () => {
           position: "bottom-right"
         });
         console.log("Success");
+        console.log("email: "+ d1 +" new password : "+ d2)
       },
       (error) => {
         console.log(error);
@@ -193,10 +192,9 @@ const Forgetpassword = () => {
   return (
 
     <div className="row g-0 auth-wrapper">
-      <div className="col-12 col-md-5 col-lg-6 h-100 ">
-
-      <img src="usa.png" width="670" height="657"></img>
-      </div>
+       <div className="col-12 col-md-5 col-lg-6 h-100 master_backgroung_side">
+          <img src="usa.png" width="670" height="657" alt="US staffing app"></img>
+        </div>
 
       <div className="col-12 col-md-7 col-lg-6 auth-main-col text-center">
         <div className="d-flex flex-column align-content-end">
@@ -261,7 +259,7 @@ const Forgetpassword = () => {
                 </div>
 
                 <div className="password mb-3">
-                  <b>Confirm Password:</b>
+                  <b>Enter Confirm Password:</b>
                   <div className="input-group">
 
                     <input

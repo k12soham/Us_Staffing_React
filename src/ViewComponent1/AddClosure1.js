@@ -393,8 +393,7 @@ class AddClosure1 extends React.Component {
         }
 
          if ((input["first"]) > (input["sub"]))
-        {
-            
+        {            
             isValid = false;
             errors["first"] = "Enter valid number for first interview";
         }
@@ -428,7 +427,6 @@ class AddClosure1 extends React.Component {
         }
 
          if (input["second"] > input["first"]) {
-            // alert("compare 2nd > 1st");
             isValid = false;
             errors["second"] = "Enter valid number for second interview";
         }
@@ -520,7 +518,7 @@ class AddClosure1 extends React.Component {
                     <div className="col-12 h-100 master_backgroung_heder">
                         <Header />
                     </div>
-                    <div className="col-2 master_backgroung_side">
+                    <div className="col-2 master_backgroung_side side">
                         <EmpSidebar />
                     </div>
 

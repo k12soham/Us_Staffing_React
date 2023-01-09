@@ -41,10 +41,14 @@ const Forgetpass2 = () => {
   const [remember, setRemember] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
   const [uname, setUname] = useState(localStorage.getItem("email"));
+  localStorage.setItem("email",uname);
+  console.log("email: "+ uname);
+
   let navigate = useNavigate();
 
-
   const validateRegister = () => {
+    // localStorage.setItem("email",username)
+    
     let isValid = true;
 
     let validator = Form.validator({
@@ -93,7 +97,8 @@ const Forgetpass2 = () => {
 
 
   const postDataToServer = (d2) => {
-    alert( d2);
+ 
+    // alert( d2);
 
     axios.post(`${base_url}/forgot_password?email=${d2}`).then(
 
