@@ -7,7 +7,7 @@ import history from './ResponseVal';
 import Header from './Header';
 import EmpSidebar from './EmpSidebar';
 import { useRef } from 'react';
-
+import { getValue } from '@testing-library/user-event/dist/utils';
 
 class AddClosure1 extends React.Component {
 
@@ -49,7 +49,7 @@ class AddClosure1 extends React.Component {
         let errors = {};
         let new_input = this.state.input
 
-        if (req < 1) {
+        if (req < 0) {
             errors["req"] = "Atleast 1 requirement is needed";
         } else {
             this.setState({
@@ -77,13 +77,14 @@ class AddClosure1 extends React.Component {
         if ((Object.keys(objlen).length) == 0) {
             // alert(" null");
 
-
             let new_input = this.state.input
             console.log("After keyUp val are ##############################: " + JSON.stringify(this.state.input));
 
             console.log("Sub data : " + JSON.stringify(this.state.input));
 
-            console.log("req : " + new_input["req"] + " sub: " + new_input["sub"]);
+            console.log("req : " + getValue(new_input["req"]) + " sub: " + getValue(new_input["sub"]));
+
+            
 
             if ((new_input["sub"]) > 999) {
                 errors["sub"] = "Only 3 digit number is accepted!";
@@ -149,7 +150,6 @@ class AddClosure1 extends React.Component {
     //     if ((new_input["first"]) < 0) {
     //         errors["first"] = "Negative number not allowed";
     //     }
-
 
     //     else {
 
@@ -393,8 +393,7 @@ class AddClosure1 extends React.Component {
         }
 
          if ((input["first"]) > (input["sub"]))
-        {
-            
+        {            
             isValid = false;
             errors["first"] = "Enter valid number for first interview";
         }
@@ -428,7 +427,6 @@ class AddClosure1 extends React.Component {
         }
 
          if (input["second"] > input["first"]) {
-            // alert("compare 2nd > 1st");
             isValid = false;
             errors["second"] = "Enter valid number for second interview";
         }
@@ -520,7 +518,7 @@ class AddClosure1 extends React.Component {
                     <div className="col-12 h-100 master_backgroung_heder">
                         <Header />
                     </div>
-                    <div className="col-2 master_backgroung_side">
+                    <div className="col-2 master_backgroung_side side">
                         <EmpSidebar />
                     </div>
 
@@ -536,7 +534,6 @@ class AddClosure1 extends React.Component {
                                         ref={(input) => { input && input.focus() }}
                                         defaultValue="It will focus"
                                     /> */}
-
 
                                     <div class="form-group">
                                         <label for="req"><b>Requirements worked on:</b></label>

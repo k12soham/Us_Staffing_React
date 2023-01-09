@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 import { toast } from "react-toastify";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './ResponseVal';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+// import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 const AdminDash1 = () => {
@@ -181,8 +181,16 @@ const AdminDash1 = () => {
     }
 
     const postGetDataByCate = (cate) => {
-        axios.get(`${base_url}/getRecordByCate?category=${cate}`).then(json => setClosureList(json.data))
+        // axios.get(`${base_url}/getRecordByCate?category=${cate}`).then(json => setClosureList(json.data))
         // localhost:8082/get_cls_by_Quarterly?empid=3&category=Quarterly
+        axios.get(`${base_url}/getRecordByCate?category=${cate}`)
+        .then(
+            json => setClosureList(json.data),
+        )
+        .catch(error => {
+            setIsShownError(true);
+            setClosureList([]);
+        })
     }
     // ---------------------------------------------End Get data by category-------------------------------------------
 
@@ -684,7 +692,7 @@ const AdminDash1 = () => {
                     {isShownError && <EmptyDataErrorMsg />}
                 </div>
             </div>
-            <NotificationContainer />
+            {/* <NotificationContainer /> */}
         </div>
     ) : (
         history.push("/"),

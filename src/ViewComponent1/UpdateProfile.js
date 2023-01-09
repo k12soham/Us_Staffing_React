@@ -44,10 +44,10 @@ class UpdateProfile extends React.Component {
         })
     }
 
- // --------------------------------------------------Password match--------------------------------------------------
+    // --------------------------------------------------Password match--------------------------------------------------
     keyUpHandler(e) {
         this.state.confirmPassword = this.state.input['confirmPass'];
-       
+
         if (((this.state.newPassword) == (this.state.confirmPassword)) && (this.state.newPassword !== undefined)) {
 
             this.setState({ passNotMatch: '' });
@@ -56,7 +56,7 @@ class UpdateProfile extends React.Component {
         }
         else {
             this.setState({ passMatch: '' });
-            this.setState({ passNotMatch: 'Pass no mtch' });
+            this.setState({ passNotMatch: 'Pass not matched' });
         }
     }
 
@@ -83,21 +83,21 @@ class UpdateProfile extends React.Component {
 
         if (this.validate()) {
 
-            if(this.state.passNotMatch != ''){
-                alert("Your new password does't match!");              
+            if (this.state.passNotMatch != '') {
+                alert("Your new password does't match!");
             }
-            else{
+            else {
                 let emp_reg = this.state.input;
                 emp_reg[e.target.name] = e.target.value;
-    
+
                 this.state.input["emp_name"] = this.state.input["emp_name"].trim(" ");
-    
+
                 // console.log("Current pass: " + this.state.currentPassword + " newPass : " + this.state.newPassword + "  confirmPass: " + this.state.confirmPassword);
                 // console.log("Submiting data are : " + JSON.stringify(this.state.input));
-    
+
                 this.postdata(emp_reg);
 
-            }           
+            }
         }
         // 👇️ clear all input values in the form
         e.target.reset();
@@ -121,8 +121,17 @@ class UpdateProfile extends React.Component {
                     { position: "top-right" }
                 );
 
-                history.push("/add_closure1");
-                window.location.reload();
+                console.log(JSON.stringify(response.data));
+                console.log(response.data.role);
+                if ((response.data.role) == "TM") {
+                    history.push("/add_closure1");
+                    window.location.reload();
+                }else{
+                    history.push("/admin_dashboard1");
+                    window.location.reload();
+                }
+                // history.push("/add_closure1");
+                // window.location.reload();
                 localStorage.setItem('empName', emp_name);
                 localStorage.setItem('empMail', username);
                 localStorage.setItem('empID', empid);
@@ -253,7 +262,7 @@ class UpdateProfile extends React.Component {
             this.setState({ showNewPass: false });
         } else {
 
-            this.setState({ showNewPass: true });   
+            this.setState({ showNewPass: true });
         }
     }
 
@@ -270,11 +279,11 @@ class UpdateProfile extends React.Component {
         let inputs = {};
         this.setState({ input: inputs });
 
-        let errors1 = {};     
-        this.setState({ errors: errors1 });     
+        let errors1 = {};
+        this.setState({ errors: errors1 });
 
         this.setState({ passNotMatch: '' });
-        this.setState({ passMatch: '' });  
+        this.setState({ passMatch: '' });
     }
 
     render() {
