@@ -121,7 +121,6 @@ const Login1 = () => {
     }
 
     // const isAuthenticated = localStorage.getItem('empID');
-
     // return isAuthenticated ? (
     return (
         <div className="row g-0 auth-wrapper">
