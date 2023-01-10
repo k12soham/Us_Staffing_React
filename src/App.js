@@ -10,7 +10,7 @@ import CalenderApp2 from './ExtraComponent/CalenderApp2';
 import ShowCompo from './utilities/ShowComponentOnClick';
 import ViewClosure1 from './ViewComponent1/ViewClosure1';
 import SignUp from './ViewComponent1/SignUp';
-import ModalDemo from './ViewComponent1/ModalDemo';
+// import ModalDemo from './ViewComponent1/ModalDemo';
 import ModalWithCSS from './ViewComponent1/ModalWithCSS';
 import UpdateProfile from './ViewComponent1/UpdateProfile';
 import DemoLifecycle from './ExtraComponent/DemoLifecycle';
@@ -19,6 +19,8 @@ import Forgetpass2 from './ViewComponent1/Forgetpass2';
 import Otp from './ViewComponent1/otp';
 import Abc from './ViewComponent1/abc';
 import CompareNumbers from './ExtraComponent/CompareNumbers';
+import PdfDemo from './ExtraComponent/PdfDemo';
+import ExportToExcel from './ExtraComponent/PdfDemo1';
 
 function App() {
   return (
@@ -44,7 +46,7 @@ function App() {
           <Route path="/show_compo" element={<ShowCompo/>}></Route>
           <Route path="/view_closure1" element={<ViewClosure1 />}></Route>
 
-          <Route path="/modal_demo" element={<ModalDemo />}></Route>
+          {/* <Route path="/modal_demo" element={<ModalDemo />}></Route> */}
           <Route path="/modal_with_css" element={<ModalWithCSS />}></Route>
 
           <Route path="/update_profile" element={<UpdateProfile />}></Route>
@@ -55,7 +57,8 @@ function App() {
 
           <Route path="/compare_num" element={< CompareNumbers/>}></Route>
           {/* <Route path="/forgot_pass1" element={<Forgetpassword />}></Route> */}
-          {/* <Route path="/DemoLifecycle" element={<DemoLifecycle />}></Route> */}
+          <Route path="/pdf_demo" element={<PdfDemo />}></Route>
+          <Route path="/export_to" element={<ExportToExcel />}></Route>
         </Routes>
       </Router>
     </div >
