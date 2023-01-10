@@ -12,14 +12,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './ResponseVal';
 // import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import exportFromJSON from "export-from-json";
+import PdfDemo1 from "../ExtraComponent/PdfDemo1";
+import ExportToExcel from "../ExtraComponent/PdfDemo1";
 import GeneratePDF from "./GeneratePDF";
-
 const AdminDash1 = () => {
 
     let empID = localStorage.getItem('empID');
 
     let empMail = localStorage.getItem('empMail');
-    console.log("empMail: "+ empMail);
+    console.log("empMail: " + empMail);
     console.log("hello");
 
     const [closureList, setClosureList] = useState([]);
@@ -49,6 +51,7 @@ const AdminDash1 = () => {
     }, []);
     console.log(closureList)
 
+    console.log(closureList);
     // -------------------------------Get Records by empid and category---------------------------------------------
 
     const handleChange = (e) => {
@@ -78,8 +81,7 @@ const AdminDash1 = () => {
         }
         else if ((category != "Customize") && (category != undefined) && t2 != "all") {
             setIsShownError(false)
-            // postGetDataByEmpCate(t2, t3);
-            postGetDataByCateOfEmp(t2,t3)
+            postGetDataByCateOfEmp(t2, t3)
         }
         else if (t3 == undefined) {
             setIsShownError(false)
@@ -133,6 +135,8 @@ const AdminDash1 = () => {
     // ---------------------------Code to handle Categories {Customize, Yearly... etc}-----------------------
 
     const handleCate = (evt) => {
+
+        console.log(closureList);
         let cate = evt.newCate;
         let eID = empIDD;
         setCategory(cate)
@@ -162,8 +166,9 @@ const AdminDash1 = () => {
             postGetDataBetDates2(date1, date2);
         }
         else {
-            setIsShownError(false)
+            setIsShownError(false);
             postGetDataByCate(cate);
+            console.log("data : " + closureList);
             setIsShown(false);
         }
     };
@@ -173,26 +178,27 @@ const AdminDash1 = () => {
         // localhost:8082/get_cls_by_Quarterly?empid=3&category=Quarterly
 
         axios.get(`${base_url}/get_cls_by_Quarterly?empid=${d1}&category=${d2}`)
-        .then(
-            json => setClosureList(json.data),
-        )
-        .catch(error => {
-            setIsShownError(true);
-            setClosureList([]);
-        })
+            .then(
+                json => setClosureList(json.data),
+            )
+            .catch(error => {
+                setIsShownError(true);
+                setClosureList([]);
+            })
     }
 
     const postGetDataByCate = (cate) => {
         // axios.get(`${base_url}/getRecordByCate?category=${cate}`).then(json => setClosureList(json.data))
         // localhost:8082/get_cls_by_Quarterly?empid=3&category=Quarterly
         axios.get(`${base_url}/getRecordByCate?category=${cate}`)
-        .then(
-            json => setClosureList(json.data),
-        )
-        .catch(error => {
-            setIsShownError(true);
-            setClosureList([]);
-        })
+            .then(
+                json => setClosureList(json.data),
+                console.log("data : " + closureList),
+            )
+            .catch(error => {
+                setIsShownError(true);
+                setClosureList([]);
+            })
     }
     // ---------------------------------------------End Get data by category-------------------------------------------
 
@@ -246,26 +252,26 @@ const AdminDash1 = () => {
         // alert("this method is called f: "+ f+ " f1 ; "+f1+ " f2 :"+f2);
         // axios.get(`${base_url}/get_cls_byDate?empid=${f}&date1=${f1}&date2=${f2}`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/get_cls_byDate?empid=${f}&date1=${f1}&date2=${f2}`)
-        .then(
-            json => setClosureList(json.data),
-        )
-        .catch(error => {
-            setIsShownError(true);
-            setClosureList([]);
-        })
+            .then(
+                json => setClosureList(json.data),
+            )
+            .catch(error => {
+                setIsShownError(true);
+                setClosureList([]);
+            })
     }
 
     const postGetDataBetDates2 = (f1, f2) => {
 
         // axios.get(`${base_url}/get_cls_byDate2?date1=${f1}&date2=${f2}`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/get_cls_byDate2?date1=${f1}&date2=${f2}`)
-        .then(
-            json => setClosureList(json.data),
-        )
-        .catch(error => {
-            setIsShownError(true);
-            setClosureList([]);
-        })
+            .then(
+                json => setClosureList(json.data),
+            )
+            .catch(error => {
+                setIsShownError(true);
+                setClosureList([]);
+            })
     }
     // --------------------------------------------End data between dates----------------------------------------------
     // ---------------------------Code to handle Categories {Customize, Yearly... etc}-----------------------
@@ -283,6 +289,19 @@ const AdminDash1 = () => {
     }
     // ---------------------------End Code to handle Categories {Customize, Yearly... etc}-----------------------
 
+    // ---------------------------Handle Download Opt------------------------------------------------------------
+    const handleDownload = (evt) => {
+
+        let d_cate = evt.DownloadOpt;
+        console.log(d_cate);
+
+        if (d_cate == "ExportToCSV") {
+            ExportToExcel(closureList);
+        } else {
+
+        }
+    }
+    // ---------------------------End Handle Download Opt------------------------------------------------------------
     // ---------------------------Empty Data Error Msg-----------------------------------------------------------
     function EmptyDataErrorMsg() {
         // console.log("Empty list");
@@ -308,7 +327,7 @@ const AdminDash1 = () => {
     }
 
     const updateInventory = ({ clsid, newReq, newSub, newFirst, newSecond, newClosure, newDate }) => {
-        
+
         if ((newSub < 0) || (newFirst < 0) || (newSecond < 0) || (newClosure < 0)) {
             alert("Please enter positive numbers")
         }
@@ -347,7 +366,7 @@ const AdminDash1 = () => {
                     if (cate == undefined && eID != null) {
                         if (eID == "all") {
                             axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
-                           
+
                         } else {
                             postGetDataByEmpID(eID);//get_cls_id
                         }
@@ -467,7 +486,7 @@ const AdminDash1 = () => {
         return closureList.map(cls => {
 
             var dd = new Date(cls.clo_date);
-           // console.log("Employees closure list  ash : ", JSON.stringify(closureList.length));
+            // console.log("Employees closure list  ash : ", JSON.stringify(closureList.length));
 
             return (
 
@@ -666,7 +685,17 @@ const AdminDash1 = () => {
                             </select>
                         </div>
                         <div className="col-2"></div>
-                        {isShown && <Box />}         
+                        {isShown && <Box />}
+                        <div className="col-4"></div>
+                     
+                        {/* <div className="col-2">
+                            <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-secondary btn-sm dropdown-toggle" style={{ width: '123px' }}>
+                                <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
+                                <option value="ExportToPDF">Export to pdf</option>
+                                <option value="ExportToCSV">Export to csv</option>
+                            </select>
+                        </div> */}
+
 
                     </div>
 
@@ -697,7 +726,26 @@ const AdminDash1 = () => {
               Generate report
             </button>
                     </Table>
-                    {isShownError && <EmptyDataErrorMsg />}
+
+                    <div className="row">
+                        <div className="col-10">
+                            {isShownError && <EmptyDataErrorMsg />}
+                        </div>
+                        <div className="col-2">
+                            {/* <button
+                                className="btn btn-primary"
+                                // onClick={() => PdfDemo1(closureList)}
+                                onClick={() => ExportToExcel(closureList)}
+                            >Export</button> */}
+
+                            <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-warning btn-sm dropdown-toggle" style={{ width: '135px' }}>
+                                <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
+                                <option value="ExportToPDF">Export to pdf</option>
+                                <option value="ExportToCSV">Export to csv</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             {/* <NotificationContainer /> */}

@@ -11,9 +11,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import history from "./ResponseVal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ExportToExcel from "../ExtraComponent/PdfDemo1";
 import GeneratePDF from "./GeneratePDF";
 import GeneratePDF1 from "./GeneratePDF1";
-
 
 function ViewClosure1() {
 
@@ -504,6 +504,11 @@ function ViewClosure1() {
             {/* <TicketsComponent tickets={closureList} /> */}
                     </Table>
                     {isShownError && <EmptyDataErrorMsg />}
+                    <button
+                        className="btn btn-primary"
+                        // onClick={() => PdfDemo1(closureList)}
+                        onClick={() => ExportToExcel(closureList)}
+                    >Export</button>
                 </div>
                 
             </div>
