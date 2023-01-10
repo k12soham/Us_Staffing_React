@@ -22,6 +22,7 @@ import CompareNumbers from './ExtraComponent/CompareNumbers';
 import PdfDemo from './ExtraComponent/PdfDemo';
 import ExportToExcel from './ExtraComponent/PdfDemo1';
 
+import GeneratePDF from './ViewComponent1/GeneratePDF';
 function App() {
   return (
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/abc" element={< Abc/>}></Route>
 
           <Route path="/compare_num" element={< CompareNumbers/>}></Route>
+          <Route path="/generatepdf" element={< GeneratePDF/>}></Route>
           {/* <Route path="/forgot_pass1" element={<Forgetpassword />}></Route> */}
           <Route path="/pdf_demo" element={<PdfDemo />}></Route>
           <Route path="/export_to" element={<ExportToExcel />}></Route>

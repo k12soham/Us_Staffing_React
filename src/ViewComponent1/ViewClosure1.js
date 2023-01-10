@@ -12,10 +12,13 @@ import history from "./ResponseVal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ExportToExcel from "../ExtraComponent/PdfDemo1";
+import GeneratePDF from "./GeneratePDF";
+import GeneratePDF1 from "./GeneratePDF1";
 
 function ViewClosure1() {
 
     let empID = localStorage.getItem('empID');
+    
 
     const [closureList, setClosureList] = useState([]);
     const [employee, setEmployee] = useState([]);
@@ -35,7 +38,13 @@ function ViewClosure1() {
     const [closure, setClosure] = useState(null);
     const [category, setCategory] = useState();
     const [isShown, setIsShown] = useState(false);
-
+    localStorage.setItem("cate",category);
+  
+    let date1 = format(startDate, "dd-MMM-yyyy");
+    let date2 = format(endDate, "dd-MMM-yyyy");
+    localStorage.setItem("startdate",date1);
+    localStorage.setItem("enddate",date2);
+    
     useEffect(() => {
         // axios.get(`${base_url}/getRecordsOfCurMonth?empid=${empID}`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getRecordsOfCurMonth?empid=${empID}`)
@@ -47,9 +56,10 @@ function ViewClosure1() {
                 setClosureList([]);
             })
 
-        console.log("Employee list : " + JSON.stringify(setClosureList))
+        console.log("Employee list : " + JSON.stringify(closureList))
     }, []);
 
+   
     const fetchInventory = () => {
         // axios.get(`${base_url}/get_cls_id?empid=${empID}`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getRecordsOfCurMonth?empid=${empID}`).then(json => setClosureList(json.data))
@@ -187,6 +197,7 @@ function ViewClosure1() {
 
         let cate = evt.newCate;
         setCategory(cate);
+       
 
         let date1 = format(startDate, "yyyy-MM-dd");
         let date2 = format(endDate, "yyyy-MM-dd");
@@ -459,6 +470,7 @@ function ViewClosure1() {
                                 }
                             </select>
                         </div>
+                        
                         {/* call Calender to select date */}
                         {isShown && <Box />}
                     </div>
@@ -483,6 +495,13 @@ function ViewClosure1() {
                             {renderTable()}
 
                         </tbody>
+                        <button
+              className="btn btn-primary"
+              onClick={() => GeneratePDF1(closureList)}
+            >
+              Generate report
+            </button>
+            {/* <TicketsComponent tickets={closureList} /> */}
                     </Table>
                     {isShownError && <EmptyDataErrorMsg />}
                     <button
@@ -491,8 +510,10 @@ function ViewClosure1() {
                         onClick={() => ExportToExcel(closureList)}
                     >Export</button>
                 </div>
+                
             </div>
         </div>
+        
         //)
     ) : (
         history.push("/"),

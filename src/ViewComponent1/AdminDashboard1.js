@@ -15,7 +15,7 @@ import 'react-notifications/lib/notifications.css';
 import exportFromJSON from "export-from-json";
 import PdfDemo1 from "../ExtraComponent/PdfDemo1";
 import ExportToExcel from "../ExtraComponent/PdfDemo1";
-
+import GeneratePDF from "./GeneratePDF";
 const AdminDash1 = () => {
 
     let empID = localStorage.getItem('empID');
@@ -49,6 +49,7 @@ const AdminDash1 = () => {
         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getEmpList_TM`).then(json => setEmployee(json.data))
     }, []);
+    console.log(closureList)
 
     console.log(closureList);
     // -------------------------------Get Records by empid and category---------------------------------------------
@@ -718,6 +719,12 @@ const AdminDash1 = () => {
                             {renderTable()}
 
                         </tbody>
+                        <button
+              className="btn btn-primary"
+              onClick={() => GeneratePDF(closureList)}
+            >
+              Generate report
+            </button>
                     </Table>
 
                     <div className="row">
