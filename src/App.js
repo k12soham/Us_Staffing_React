@@ -19,6 +19,7 @@ import Forgetpass2 from './ViewComponent1/Forgetpass2';
 import Otp from './ViewComponent1/otp';
 import Abc from './ViewComponent1/abc';
 import CompareNumbers from './ExtraComponent/CompareNumbers';
+import GeneratePDF from './ViewComponent1/GeneratePDF';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/abc" element={< Abc/>}></Route>
 
           <Route path="/compare_num" element={< CompareNumbers/>}></Route>
+          <Route path="/generatepdf" element={< GeneratePDF/>}></Route>
           {/* <Route path="/forgot_pass1" element={<Forgetpassword />}></Route> */}
           {/* <Route path="/DemoLifecycle" element={<DemoLifecycle />}></Route> */}
         </Routes>

@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './ResponseVal';
 // import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import GeneratePDF from "./GeneratePDF";
 
 const AdminDash1 = () => {
 
@@ -46,6 +47,7 @@ const AdminDash1 = () => {
         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getEmpList_TM`).then(json => setEmployee(json.data))
     }, []);
+    console.log(closureList)
 
     // -------------------------------Get Records by empid and category---------------------------------------------
 
@@ -688,6 +690,12 @@ const AdminDash1 = () => {
                             {renderTable()}
 
                         </tbody>
+                        <button
+              className="btn btn-primary"
+              onClick={() => GeneratePDF(closureList)}
+            >
+              Generate report
+            </button>
                     </Table>
                     {isShownError && <EmptyDataErrorMsg />}
                 </div>
