@@ -17,13 +17,12 @@ let currentdate = format(a, "dd-MMM-yyyy");
 let cate=localStorage.getItem("cate");
 let startdate=localStorage.getItem("startdate");
 let enddate=localStorage.getItem("enddate");
-console.log(startdate);
-console.log(enddate)
+
  
 
 
   let doc = new jsPDF();
-   let doc1 = new jsPDF();
+
   // doc1.setFontSize(10)
 
 
@@ -31,7 +30,7 @@ console.log(enddate)
   const tableColumn = ["Sr No.", "Requirement", "Submission", "First", "Second","Closure","Date"];
   // define an empty array of rows
   const tableRows = [];
-  const serial =10;
+
   let index=1;
   // for each ticket pass all its data into an array
   tickets.forEach(ticket => {
