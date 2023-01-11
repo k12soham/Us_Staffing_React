@@ -22,6 +22,7 @@ function ViewClosure1() {
     
 
     const [closureList, setClosureList] = useState([]);
+    
     const [employee, setEmployee] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -39,8 +40,8 @@ function ViewClosure1() {
     const [closure, setClosure] = useState(null);
     const [category, setCategory] = useState();
     const [isShown, setIsShown] = useState(false);
+    
     localStorage.setItem("cate",category);
-  
     let date1 = format(startDate, "dd-MMM-yyyy");
     let date2 = format(endDate, "dd-MMM-yyyy");
     localStorage.setItem("startdate",date1);
@@ -141,6 +142,19 @@ function ViewClosure1() {
                         alert("Enter valid number for all requirements");
                     }
                 )
+        }
+    }
+
+    const handleDownload = (evt) => {
+
+        let d_cate = evt.DownloadOpt;
+    
+
+        if (d_cate == "ExportToCSV") {
+            ExportToExcel(closureList);
+            
+        } else {
+            GeneratePDF(closureList);
         }
     }
 
@@ -496,20 +510,20 @@ function ViewClosure1() {
                             {renderTable()}
 
                         </tbody>
-                        <button
-              className="btn btn-primary"
-              onClick={() => GeneratePDF1(closureList)}
-            >
-              Generate report
-            </button>
-            {/* <TicketsComponent tickets={closureList} /> */}
+           
                     </Table>
+                    <div className="row">
+                        <div className="col-10">
                     {isShownError && <EmptyDataErrorMsg />}
-                    <button
-                        className="btn btn-primary"
-                        // onClick={() => PdfDemo1(closureList)}
-                        onClick={() => ExportToExcel2(closureList)}
-                    >Export</button>
+                   </div>
+                         <div className="col-2">
+                        <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-warning btn-sm dropdown-toggle" style={{ width: '135px' }}>
+                                <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
+                                <option value="ExportToPDF">Export to pdf</option>
+                                <option value="ExportToCSV">Export to csv</option>
+                            </select>
+                            </div>
+                </div>
                 </div>
                 
             </div>

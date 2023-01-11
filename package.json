@@ -26,7 +26,6 @@
     "react-data-export": "^0.6.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
-    "react-export-excel-style-fixed": "^0.5.8",
     "react-export-table-to-excel": "^1.0.6",
     "react-modal": "^3.16.1",
     "react-notifications": "^1.7.4",
