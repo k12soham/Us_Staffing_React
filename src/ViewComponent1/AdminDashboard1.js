@@ -16,6 +16,10 @@ import exportFromJSON from "export-from-json";
 import PdfDemo1 from "../ExtraComponent/PdfDemo1";
 import ExportToExcel from "../ExtraComponent/PdfDemo1";
 import GeneratePDF from "./GeneratePDF";
+
+import { downloadExcel } from "react-export-table-to-excel";
+import Excel1 from "./Excel1";
+
 const AdminDash1 = () => {
 
     let empID = localStorage.getItem('empID');
@@ -296,11 +300,14 @@ const AdminDash1 = () => {
         console.log(d_cate);
 
         if (d_cate == "ExportToCSV") {
-            ExportToExcel(closureList);
+            //ExportToExcel(closureList);
+            Excel1(closureList)
         } else {
-
+            GeneratePDF(closureList);
         }
     }
+
+   
     // ---------------------------End Handle Download Opt------------------------------------------------------------
     // ---------------------------Empty Data Error Msg-----------------------------------------------------------
     function EmptyDataErrorMsg() {
@@ -719,12 +726,12 @@ const AdminDash1 = () => {
                             {renderTable()}
 
                         </tbody>
-                        <button
+                        {/* <button
               className="btn btn-primary"
               onClick={() => GeneratePDF(closureList)}
             >
               Generate report
-            </button>
+            </button> */}
                     </Table>
 
                     <div className="row">
@@ -732,11 +739,8 @@ const AdminDash1 = () => {
                             {isShownError && <EmptyDataErrorMsg />}
                         </div>
                         <div className="col-2">
-                            {/* <button
-                                className="btn btn-primary"
-                                // onClick={() => PdfDemo1(closureList)}
-                                onClick={() => ExportToExcel(closureList)}
-                            >Export</button> */}
+
+                              {/* <button onClick={handleDownloadExcel}>download excel</button> */}
 
                             <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-warning btn-sm dropdown-toggle" style={{ width: '135px' }}>
                                 <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
