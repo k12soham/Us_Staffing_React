@@ -11,9 +11,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import history from "./ResponseVal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import ExportToExcel from "../ExtraComponent/PdfDemo1";
+// import ExportToExcel from "../ExtraComponent/PdfDemo1";
 import GeneratePDF from "./GeneratePDF";
 import GeneratePDF1 from "./GeneratePDF1";
+import ExportToExcel2 from "../ExtraComponent/ExportToExcel2";
 
 function ViewClosure1() {
 
@@ -507,7 +508,7 @@ function ViewClosure1() {
                     <button
                         className="btn btn-primary"
                         // onClick={() => PdfDemo1(closureList)}
-                        onClick={() => ExportToExcel(closureList)}
+                        onClick={() => ExportToExcel2(closureList)}
                     >Export</button>
                 </div>
                 
