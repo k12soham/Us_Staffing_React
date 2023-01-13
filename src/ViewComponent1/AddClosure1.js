@@ -25,15 +25,15 @@ class AddClosure1 extends React.Component {
             // add1:true,
             // add2:true
 
-         
-        };
-      //  console.log("Value of errors " + JSON.stringify(this.state.errors));
-       // console.log("Value of input[req] " + this.state.input["req"]);
-       // console.log("Value of Err length " + this.state.errors.length);
 
-       console.log(this.state.add1);
-       console.log(this.state.add2);
-       
+        };
+        //  console.log("Value of errors " + JSON.stringify(this.state.errors));
+        // console.log("Value of input[req] " + this.state.input["req"]);
+        // console.log("Value of Err length " + this.state.errors.length);
+
+        console.log(this.state.add1);
+        console.log(this.state.add2);
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         /*this.keyUpHandlerReq = this.keyUpHandlerReq.bind(this);
@@ -44,194 +44,194 @@ class AddClosure1 extends React.Component {
 
     }
 
-   /* keyUpHandlerReq(e) {
-        let req = e.target.value;
-        let errors = {};
-        let new_input = this.state.input
-
-        if (req < 0) {
-            errors["req"] = "Atleast 1 requirement is needed";
-        } else {
-            this.setState({
-                input: new_input
-            })
-            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
-        }
-
-        this.setState({
-            errors: errors
-        });
-
-        console.log("error: " + JSON.stringify(this.state.errors));
-        console.log("Value of Err length " + this.state.errors.length);
-    }
-
-    keyUpHandlerSub(e) {
-        const objlen = this.state.errors
-        let sub = e.target.value;
-        console.log("sub : " + sub);
-        let errors = {};
-        console.log("error: " + JSON.stringify(this.state.errors));
-        console.log("Value of Err length " + Object.keys(objlen).length);
-
-        if ((Object.keys(objlen).length) == 0) {
-            // alert(" null");
-
-            let new_input = this.state.input
-            console.log("After keyUp val are ##############################: " + JSON.stringify(this.state.input));
-
-            console.log("Sub data : " + JSON.stringify(this.state.input));
-
-            console.log("req : " + getValue(new_input["req"]) + " sub: " + getValue(new_input["sub"]));
-
-            
-
-            if ((new_input["sub"]) > 999) {
-                errors["sub"] = "Only 3 digit number is accepted!";
-            } else {
-                this.setState({
-                    input: new_input
-                })
-                console.log("After keyUp val are : " + JSON.stringify(this.state.input));
-            }
-
-            this.setState({
-                errors: errors
-            });
-
-        }
-    }
-
-    keyUpHandlerFirst(e) {
-
-        let first = e.target.value;
-        let errors = {};
-        let new_input = this.state.input
-
-        let sub = new_input["sub"];
-        let first1 = new_input["first"];
-
-        console.log("sub = "+sub+ " first1 = "+ first1);
-
-        console.log("let error :"+ JSON.stringify(errors));
-
-        const objlen = this.state.errors
-       
-        if ((new_input["first"]) < 0) {
-            errors["first"] = "Negative number not allowed";
-        }
-        else if (sub < first1) {
-            errors["first"] = "Please enter valid number for first interview-keup";
-            console.log("let error in if statement :"+ JSON.stringify(errors));
-        }
-        else {
-            this.setState({
-                input: new_input
-            })
-            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
-            console.log("let error in Else :"+ JSON.stringify(errors));
-        } 
-
-        this.setState({
-            errors: errors
-        });
-    }
-
-    // keyUpHandlerFirst(e) {
-
-    //     let first = e.target.value;
-    //     let errors = {};
-    //     let new_input = this.state.input
-
-    //     console.log("let error :"+ JSON.stringify(errors));
-
-    //     const objlen = this.state.errors
-       
-    //     if ((new_input["first"]) < 0) {
-    //         errors["first"] = "Negative number not allowed";
-    //     }
-
-    //     else {
-
-    //         console.log("first: " + (new_input["first"]) + " Sub : " + (new_input["sub"]));
-
-    //         if ((new_input["first"]) > (new_input["sub"])) {
-    //             errors["first"] = "Please enter valid number for first interview-keup";
-    //             console.log("let error in if statement :"+ JSON.stringify(errors));
-    //         }
-
-    //         else {
-    //             this.setState({
-    //                 input: new_input
-    //             })
-    //             console.log("After keyUp val are : " + JSON.stringify(this.state.input));
-    //             console.log("let error in Else :"+ JSON.stringify(errors));
-    //         }           
-    //         // }
-    //     }
-
-    //     this.setState({
-    //         errors: errors
-    //     });
-    // }
-
-    keyUpHandlerSecond(e) {
-        console.log()
-        let second = e.target.value;
-        let errors = {};
-        let new_input = this.state.input
-        const objlen = this.state.errors
-        // if ((Object.keys(objlen).length) == 0) {
-        // if ((new_input["second"]) > (new_input["first"]) || (new_input["closure"]) > (new_input["second"])) {
-
-        console.log("Second: " + (new_input["second"]) + " First : " + (new_input["first"]));
-
-        if ((new_input["second"]) > (new_input["first"])) {
-            errors["second"] = "Please enter valid number for second interview";
-        }
-        else if ((new_input["second"]) < 0) {
-            errors["second"] = "Negative number not allowed";
-        }
-        else {
-            this.setState({
-                input: new_input
-            })
-            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
-        }
-        this.setState({
-            errors: errors
-        });
-        // }
-    }
-
-    keyUpHandlerClosure(e) {
-        let closure = e.target.value;
-        let errors = {};
-        let new_input = this.state.input
-
-
-        const objlen = this.state.errors
-        // if ((Object.keys(objlen).length) == 0) {
-
-        console.log("Closure: " + (new_input["closure"]) + " Second : " + (new_input["second"]));
-
-        if ((new_input["closure"]) > (new_input["second"])) {
-            errors["closure"] = "Please enter valid number for ";
-        }
-        else if ((new_input["closure"]) < 0) {
-            errors["closure"] = "Negative number not allowed";
-        }
-        else {
-            this.setState({
-                input: new_input
-            })
-            console.log("After keyUp val are : " + JSON.stringify(this.state.input));
-        }
-        this.setState({
-            errors: errors
-        });
-        // }
-    }*/
+    /* keyUpHandlerReq(e) {
+         let req = e.target.value;
+         let errors = {};
+         let new_input = this.state.input
+ 
+         if (req < 0) {
+             errors["req"] = "Atleast 1 requirement is needed";
+         } else {
+             this.setState({
+                 input: new_input
+             })
+             console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+         }
+ 
+         this.setState({
+             errors: errors
+         });
+ 
+         console.log("error: " + JSON.stringify(this.state.errors));
+         console.log("Value of Err length " + this.state.errors.length);
+     }
+ 
+     keyUpHandlerSub(e) {
+         const objlen = this.state.errors
+         let sub = e.target.value;
+         console.log("sub : " + sub);
+         let errors = {};
+         console.log("error: " + JSON.stringify(this.state.errors));
+         console.log("Value of Err length " + Object.keys(objlen).length);
+ 
+         if ((Object.keys(objlen).length) == 0) {
+             // alert(" null");
+ 
+             let new_input = this.state.input
+             console.log("After keyUp val are ##############################: " + JSON.stringify(this.state.input));
+ 
+             console.log("Sub data : " + JSON.stringify(this.state.input));
+ 
+             console.log("req : " + getValue(new_input["req"]) + " sub: " + getValue(new_input["sub"]));
+ 
+             
+ 
+             if ((new_input["sub"]) > 999) {
+                 errors["sub"] = "Only 3 digit number is accepted!";
+             } else {
+                 this.setState({
+                     input: new_input
+                 })
+                 console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+             }
+ 
+             this.setState({
+                 errors: errors
+             });
+ 
+         }
+     }
+ 
+     keyUpHandlerFirst(e) {
+ 
+         let first = e.target.value;
+         let errors = {};
+         let new_input = this.state.input
+ 
+         let sub = new_input["sub"];
+         let first1 = new_input["first"];
+ 
+         console.log("sub = "+sub+ " first1 = "+ first1);
+ 
+         console.log("let error :"+ JSON.stringify(errors));
+ 
+         const objlen = this.state.errors
+        
+         if ((new_input["first"]) < 0) {
+             errors["first"] = "Negative number not allowed";
+         }
+         else if (sub < first1) {
+             errors["first"] = "Please enter valid number for first interview-keup";
+             console.log("let error in if statement :"+ JSON.stringify(errors));
+         }
+         else {
+             this.setState({
+                 input: new_input
+             })
+             console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+             console.log("let error in Else :"+ JSON.stringify(errors));
+         } 
+ 
+         this.setState({
+             errors: errors
+         });
+     }
+ 
+     // keyUpHandlerFirst(e) {
+ 
+     //     let first = e.target.value;
+     //     let errors = {};
+     //     let new_input = this.state.input
+ 
+     //     console.log("let error :"+ JSON.stringify(errors));
+ 
+     //     const objlen = this.state.errors
+        
+     //     if ((new_input["first"]) < 0) {
+     //         errors["first"] = "Negative number not allowed";
+     //     }
+ 
+     //     else {
+ 
+     //         console.log("first: " + (new_input["first"]) + " Sub : " + (new_input["sub"]));
+ 
+     //         if ((new_input["first"]) > (new_input["sub"])) {
+     //             errors["first"] = "Please enter valid number for first interview-keup";
+     //             console.log("let error in if statement :"+ JSON.stringify(errors));
+     //         }
+ 
+     //         else {
+     //             this.setState({
+     //                 input: new_input
+     //             })
+     //             console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+     //             console.log("let error in Else :"+ JSON.stringify(errors));
+     //         }           
+     //         // }
+     //     }
+ 
+     //     this.setState({
+     //         errors: errors
+     //     });
+     // }
+ 
+     keyUpHandlerSecond(e) {
+         console.log()
+         let second = e.target.value;
+         let errors = {};
+         let new_input = this.state.input
+         const objlen = this.state.errors
+         // if ((Object.keys(objlen).length) == 0) {
+         // if ((new_input["second"]) > (new_input["first"]) || (new_input["closure"]) > (new_input["second"])) {
+ 
+         console.log("Second: " + (new_input["second"]) + " First : " + (new_input["first"]));
+ 
+         if ((new_input["second"]) > (new_input["first"])) {
+             errors["second"] = "Please enter valid number for second interview";
+         }
+         else if ((new_input["second"]) < 0) {
+             errors["second"] = "Negative number not allowed";
+         }
+         else {
+             this.setState({
+                 input: new_input
+             })
+             console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+         }
+         this.setState({
+             errors: errors
+         });
+         // }
+     }
+ 
+     keyUpHandlerClosure(e) {
+         let closure = e.target.value;
+         let errors = {};
+         let new_input = this.state.input
+ 
+ 
+         const objlen = this.state.errors
+         // if ((Object.keys(objlen).length) == 0) {
+ 
+         console.log("Closure: " + (new_input["closure"]) + " Second : " + (new_input["second"]));
+ 
+         if ((new_input["closure"]) > (new_input["second"])) {
+             errors["closure"] = "Please enter valid number for ";
+         }
+         else if ((new_input["closure"]) < 0) {
+             errors["closure"] = "Negative number not allowed";
+         }
+         else {
+             this.setState({
+                 input: new_input
+             })
+             console.log("After keyUp val are : " + JSON.stringify(this.state.input));
+         }
+         this.setState({
+             errors: errors
+         });
+         // }
+     }*/
 
     resetForm = () => {
         // alert("Clear");
@@ -324,10 +324,12 @@ class AddClosure1 extends React.Component {
         let input = this.state.input;
         let errors = {};
         let isValid = true;
-        let addNew1=true;
-        let addNew2=true;
-       // console.log(addNew1);
-       // console.log(addNew2);
+        let addNew1 = true;
+        let addNew2 = true;
+        // console.log(addNew1);
+        // console.log(addNew2);
+
+        console.log("type of input " + typeof(input["req"]));
 
         console.log("Req " + input["req"]);
         console.log("Sub " + input["sub"]);
@@ -335,17 +337,25 @@ class AddClosure1 extends React.Component {
         console.log("Second " + input["second"]);
         console.log("Closure " + input["closure"]);
 
-      
-        if ((!input["req"])) {
+        let reqNum = parseInt(input["req"] );
+        let subNum = parseInt(input["sub"] );
+        let fNum = parseInt(input["first"] );
+        let sNum = parseInt(input["second"] );
+        let clsNum = parseInt(input["closure"] );
+        
+        console.log("type of reqNum " + typeof(reqNum));
+
+
+        if ((!reqNum)) {
             isValid = false;
             errors["req"] = "This field is required";
         }
-       
-       else if (input["req"] < 1) {
+
+        else if (reqNum < 1) {
             isValid = false;
             errors["req"] = "Atleast 1 requirement is needed";
         }
-        else if ((typeof input["req"] !== undefined)) {
+        else if (reqNum !== undefined) {
             // alert("regex valid cheked & req= "+input["req"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -355,34 +365,34 @@ class AddClosure1 extends React.Component {
             }
         }
         // -----------------------------------------------------------------------------------------------------------------------
-        if (!input["sub"]) {
+        if (!subNum) {
             isValid = false;
             errors["sub"] = "This field is required";
         }
-       else if (input["sub"] < 0) {
+        else if (subNum < 0) {
             isValid = false;
             errors["sub"] = "Enter positive number";
         }
-       else if ((typeof input["sub"] !== undefined)) {
+        else if ((subNum !== undefined)) {
             // alert("regex valid cheked for sub"+input["sub"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
-             if (!pattern.test(input["sub"])) {
+            if (!pattern.test(input["sub"])) {
                 isValid = false;
                 errors["sub"] = "Only 3 digit number is accepted!";
             }
         }
         // ----------------------------------------------------------------------------------------------------------------------
-        if (!input["first"]) {
+        if (!fNum) {
             isValid = false;
             errors["first"] = "This field is required";
         }
-       else if (input["first"] < 0 ) {
-   
+        else if (fNum < 0) {
+
             isValid = false;
             errors["first"] = "Enter positive number";
         }
-      else  if ((typeof input["first"] !== undefined)) {
+        else if ((fNum !== undefined)) {
             // alert("regex valid cheked for first, first= "+input["first"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -392,8 +402,7 @@ class AddClosure1 extends React.Component {
             }
         }
 
-         if ((input["first"]) > (input["sub"]))
-        {            
+        if (fNum > subNum) {
             isValid = false;
             errors["first"] = "Enter valid number for first interview";
         }
@@ -402,21 +411,18 @@ class AddClosure1 extends React.Component {
         //     this.setState({add1:false})
         //  //   console.log(addNew1)
         //     input["first"]=0+ input["first"]
-            
+
         // }
-
-       
-
         // ----------------------------------------------------------------------------------------------------------------------
-        if (!input["second"]) {
+        if (!sNum) {
             isValid = false;
             errors["second"] = "This field is required";
         }
-        else if (input["second"] < 0) {
+        else if (sNum < 0) {
             isValid = false;
             errors["second"] = "Enter positive number";
         }
-        else if ((typeof input["second"] !== undefined)) {
+        else if ((sNum !== undefined)) {
             // alert("regex valid cheked for second "+input["second"]);
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
@@ -426,33 +432,22 @@ class AddClosure1 extends React.Component {
             }
         }
 
-         if (input["second"] > input["first"]) {
+        if (sNum > input["first"]) {
             isValid = false;
             errors["second"] = "Enter valid number for second interview";
         }
 
-        
-        // if (((input["second"]) <=9 )&& this.state.add2) {
-        //   //  addNew2 = false;
-        //   this.setState({add2:false})
-        //     input["second"]= 0+ input["second"]
-           
-        // }
-
-        
-
         // ----------------------------------------------------------------------------------------------------------------------
-        if (!input["closure"]) {
+        if (!clsNum) {
             isValid = false;
             errors["closure"] = "This field is required";
         }
 
-        else if (input["closure"] < 0) {
+        else if (clsNum < 0) {
             isValid = false;
             errors["closure"] = "Enter positive number";
         }
-        else if ((typeof input["closure"] !== "undefined")) {
-            // alert("regex valid cheked for cls "+input["closure"]);
+        else if ((clsNum !== "undefined")) {
 
             var pattern = new RegExp(/^(?=.*[0-9]).{1,3}$/); //new RegExp(/^[A-Za-z#+.\b]+$/);
             if (!pattern.test(input["closure"])) {
@@ -460,44 +455,12 @@ class AddClosure1 extends React.Component {
                 errors["closure"] = "Only 3 digit number is accepted!";
             }
         }
-         if ((input["closure"]) > (input["second"])) {
+        if (clsNum > sNum) {
             // alert("compare cls >2nd");
             isValid = false;
             errors["closure"] = "Enter valid number for closure";
         }
         // ---------------------------------------------------------------------------------------------------------------------
-      
-
-
-                ////////////////////////////
-    
-      /*  if ((input["req"]) > new RegExp('\d') && (input["req"]) <=9 ) {
-            input["req"]=0+ input["req"]
-         
-           
-        }
-
-        if ((input["sub"]) <=9) {
-            input["sub"]=0+ input["sub"]
-     
-        }
-
-        if ((input["first"]) <=9) {
-            input["first"]=0+ input["first"]
-          
-        }
-
-        if ((input["second"]) <=9) {
-            input["second"]=0+ input["second"]
-          
-        }
-
-        if ((input["closure"]) <=9) {
-            input["closure"]=0+ input["closure"]
-          
-        }
-*/
-
 
         this.setState({
             errors: errors
@@ -528,8 +491,9 @@ class AddClosure1 extends React.Component {
                             <div className="col-6" style={{ padding: '0px', marginLeft: '30px' }}>{/* width: '203px', */}
 
                                 <br />
-                                {/* <Form></Form> */}
-                                <form onSubmit={this.handleSubmit}>{/* 
+                               
+                                <form onSubmit={this.handleSubmit}>
+                                    {/* 
                                     <input
                                         ref={(input) => { input && input.focus() }}
                                         defaultValue="It will focus"
