@@ -18,15 +18,13 @@ import ExportToExcel from "../ExtraComponent/PdfDemo1";
 import GeneratePDF from "./GeneratePDF";
 
 import { downloadExcel } from "react-export-table-to-excel";
-import Excel1 from "./Excel1";
+import Excel from "./Excel";
 
 const AdminDash1 = () => {
 
     let empID = localStorage.getItem('empID');
 
     let empMail = localStorage.getItem('empMail');
-    console.log("empMail: " + empMail);
-    console.log("hello");
 
     const [closureList, setClosureList] = useState([]);
     const [employee, setEmployee] = useState([]);
@@ -36,6 +34,7 @@ const AdminDash1 = () => {
     const [category, setCategory] = useState();
     const [isShown, setIsShown] = useState(false);
     const [isShownError, setIsShownError] = useState(false);
+    const [isDownload, setIsDownload] = useState(false);
     const [dt1, setDt1] = useState(new Date());
 
     const [inEditMode, setInEditMode,] = useState({
@@ -53,9 +52,7 @@ const AdminDash1 = () => {
         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getEmpList_TM`).then(json => setEmployee(json.data))
     }, []);
-    console.log(closureList)
-
-    console.log(closureList);
+    // console.log(closureList);
     // -------------------------------Get Records by empid and category---------------------------------------------
 
     const handleChange = (e) => {
@@ -128,10 +125,12 @@ const AdminDash1 = () => {
         axios.get(`${base_url}/getRecordsOfCurMonth?empid=${t2}`)
             .then(
                 json => setClosureList(json.data),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
             })
     }
     // -------------------------------Get Records by empid and category---------------------------------------------
@@ -184,10 +183,12 @@ const AdminDash1 = () => {
         axios.get(`${base_url}/get_cls_by_Quarterly?empid=${d1}&category=${d2}`)
             .then(
                 json => setClosureList(json.data),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
             })
     }
 
@@ -198,10 +199,12 @@ const AdminDash1 = () => {
             .then(
                 json => setClosureList(json.data),
                 console.log("data : " + closureList),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
             })
     }
     // ---------------------------------------------End Get data by category-------------------------------------------
@@ -258,10 +261,12 @@ const AdminDash1 = () => {
         axios.get(`${base_url}/get_cls_byDate?empid=${f}&date1=${f1}&date2=${f2}`)
             .then(
                 json => setClosureList(json.data),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
             })
     }
 
@@ -271,10 +276,12 @@ const AdminDash1 = () => {
         axios.get(`${base_url}/get_cls_byDate2?date1=${f1}&date2=${f2}`)
             .then(
                 json => setClosureList(json.data),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
             })
     }
     // --------------------------------------------End data between dates----------------------------------------------
@@ -293,6 +300,21 @@ const AdminDash1 = () => {
     }
     // ---------------------------End Code to handle Categories {Customize, Yearly... etc}-----------------------
 
+    // ---------------------------------------------Function to show-hide calender-------------------------------------
+    function Download() {
+
+        return (
+            <div className="d-inline-flex w-50" >
+                <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-warning btn-sm dropdown-toggle" style={{ width: '135px' }}>
+                    <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
+                    <option value="ExportToPDF">Export to pdf</option>
+                    <option value="ExportToCSV">Export to csv</option>
+                </select>
+            </div>
+        );
+    }
+    // ---------------------------------------------Render table code--------------------------------------------------  
+
     // ---------------------------Handle Download Opt------------------------------------------------------------
     const handleDownload = (evt) => {
 
@@ -301,13 +323,12 @@ const AdminDash1 = () => {
 
         if (d_cate == "ExportToCSV") {
             //ExportToExcel(closureList);
-            Excel1(closureList)
+            Excel(closureList)
         } else {
             GeneratePDF(closureList);
         }
     }
 
-   
     // ---------------------------End Handle Download Opt------------------------------------------------------------
     // ---------------------------Empty Data Error Msg-----------------------------------------------------------
     function EmptyDataErrorMsg() {
@@ -694,15 +715,6 @@ const AdminDash1 = () => {
                         <div className="col-2"></div>
                         {isShown && <Box />}
                         <div className="col-4"></div>
-                     
-                        {/* <div className="col-2">
-                            <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-secondary btn-sm dropdown-toggle" style={{ width: '123px' }}>
-                                <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
-                                <option value="ExportToPDF">Export to pdf</option>
-                                <option value="ExportToCSV">Export to csv</option>
-                            </select>
-                        </div> */}
-
 
                     </div>
 
@@ -726,12 +738,7 @@ const AdminDash1 = () => {
                             {renderTable()}
 
                         </tbody>
-                        {/* <button
-              className="btn btn-primary"
-              onClick={() => GeneratePDF(closureList)}
-            >
-              Generate report
-            </button> */}
+                      
                     </Table>
 
                     <div className="row">
@@ -739,14 +746,7 @@ const AdminDash1 = () => {
                             {isShownError && <EmptyDataErrorMsg />}
                         </div>
                         <div className="col-2">
-
-                              {/* <button onClick={handleDownloadExcel}>download excel</button> */}
-
-                            <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-warning btn-sm dropdown-toggle" style={{ width: '135px' }}>
-                                <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
-                                <option value="ExportToPDF">Export to pdf</option>
-                                <option value="ExportToCSV">Export to csv</option>
-                            </select>
+                            {isDownload && <Download />}
                         </div>
                     </div>
 
