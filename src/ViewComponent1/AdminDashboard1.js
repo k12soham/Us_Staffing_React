@@ -25,6 +25,7 @@ const AdminDash1 = () => {
     let empID = localStorage.getItem('empID');
 
     let empMail = localStorage.getItem('empMail');
+    
 
     const [closureList, setClosureList] = useState([]);
     const [employee, setEmployee] = useState([]);
@@ -47,6 +48,14 @@ const AdminDash1 = () => {
     const [first, setFirst] = useState(null);
     const [second, setSecond] = useState(null);
     const [closure, setClosure] = useState(null);
+     const [dowload, setDownload] = useState(null);
+
+      
+    localStorage.setItem("cate",category);
+    let date1 = format(startDate, "dd-MMM-yyyy");
+    let date2 = format(endDate, "dd-MMM-yyyy");
+    localStorage.setItem("startdate",date1);
+    localStorage.setItem("enddate",date2);
 
     useEffect(() => {
         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
@@ -320,12 +329,16 @@ const AdminDash1 = () => {
 
         let d_cate = evt.DownloadOpt;
         console.log(d_cate);
-
+      //  setDownload(d_cate)
+     
         if (d_cate == "ExportToCSV") {
             //ExportToExcel(closureList);
             Excel(closureList)
+            Excel1(closureList)
+             // setDownload("")
         } else {
             GeneratePDF(closureList);
+             ///setDownload("")
         }
     }
 
