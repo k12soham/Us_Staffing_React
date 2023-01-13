@@ -153,7 +153,7 @@ function ViewClosure1() {
             ExportToExcel(closureList);
             
         } else {
-            GeneratePDF(closureList);
+            GeneratePDF1(closureList);
         }
     }
 
