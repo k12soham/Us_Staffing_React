@@ -13,16 +13,16 @@ import SignUp from './ViewComponent1/SignUp';
 // import ModalDemo from './ViewComponent1/ModalDemo';
 import ModalWithCSS from './ViewComponent1/ModalWithCSS';
 import UpdateProfile from './ViewComponent1/UpdateProfile';
-import DemoLifecycle from './ExtraComponent/DemoLifecycle';
+// import DemoLifecycle from './ExtraComponent/DemoLifecycle';
 import Forgetpassword from './ViewComponent1/Forgetpassword';
 import Forgetpass2 from './ViewComponent1/Forgetpass2';
 import Otp from './ViewComponent1/otp';
 import Abc from './ViewComponent1/abc';
 import CompareNumbers from './ExtraComponent/CompareNumbers';
-import PdfDemo from './ExtraComponent/PdfDemo';
+import ExportToExcel2 from './ExtraComponent/ExportToExcel2';
 import ExportToExcel from './ExtraComponent/PdfDemo1';
-
 import GeneratePDF from './ViewComponent1/GeneratePDF';
+
 function App() {
   return (
 
@@ -59,14 +59,14 @@ function App() {
           <Route path="/compare_num" element={< CompareNumbers/>}></Route>
           <Route path="/generatepdf" element={< GeneratePDF/>}></Route>
           {/* <Route path="/forgot_pass1" element={<Forgetpassword />}></Route> */}
-          <Route path="/pdf_demo" element={<PdfDemo />}></Route>
+          <Route path="/export_excel2" element={<ExportToExcel2 />}></Route>
           <Route path="/export_to" element={<ExportToExcel />}></Route>
+
         </Routes>
       </Router>
     </div >
 
   );
 }
-
 
 export default App;

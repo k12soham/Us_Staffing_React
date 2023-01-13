@@ -11,21 +11,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import history from "./ResponseVal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import ExportToExcel from "../ExtraComponent/PdfDemo1";
+// import ExportToExcel from "../ExtraComponent/PdfDemo1";
 import GeneratePDF from "./GeneratePDF";
 import GeneratePDF1 from "./GeneratePDF1";
+import ExportToExcel2 from "../ExtraComponent/ExportToExcel2";
+import Excel2 from "./Excel2";
 
 function ViewClosure1() {
 
     let empID = localStorage.getItem('empID');
-    
 
     const [closureList, setClosureList] = useState([]);
-    
+
     const [employee, setEmployee] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [isShownError, setIsShownError] = useState(false);
+    const [isDownload, setIsDownload] = useState(false);
 
     const [inEditMode, setInEditMode,] = useState({
         status: true,
@@ -39,28 +41,32 @@ function ViewClosure1() {
     const [closure, setClosure] = useState(null);
     const [category, setCategory] = useState();
     const [isShown, setIsShown] = useState(false);
-    
-    localStorage.setItem("cate",category);
+    const [isSelected, setIsSelected] = useState("Download");
+
+    localStorage.setItem("cate", category);
     let date1 = format(startDate, "dd-MMM-yyyy");
     let date2 = format(endDate, "dd-MMM-yyyy");
-    localStorage.setItem("startdate",date1);
-    localStorage.setItem("enddate",date2);
-    
+    localStorage.setItem("startdate", date1);
+    localStorage.setItem("enddate", date2);
+
     useEffect(() => {
         // axios.get(`${base_url}/getRecordsOfCurMonth?empid=${empID}`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getRecordsOfCurMonth?empid=${empID}`)
             .then(
                 json => setClosureList(json.data),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
+
             })
 
-        console.log("Employee list : " + JSON.stringify(closureList))
+        // console.log("Employee list : " + JSON.stringify(closureList))
     }, []);
 
-   
+
     const fetchInventory = () => {
         // axios.get(`${base_url}/get_cls_id?empid=${empID}`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getRecordsOfCurMonth?empid=${empID}`).then(json => setClosureList(json.data))
@@ -147,14 +153,15 @@ function ViewClosure1() {
     const handleDownload = (evt) => {
 
         let d_cate = evt.DownloadOpt;
-    
 
         if (d_cate == "ExportToCSV") {
-            ExportToExcel(closureList);
-            
+            Excel2(closureList);
+            // setIsDownload(false);
+
         } else {
             GeneratePDF1(closureList);
         }
+        <option hidden value=""><button>Download</button></option>
     }
 
     const onSave = ({ clsid, newReq, newSub, newFirst, newSecond, newClosure }) => {
@@ -211,7 +218,6 @@ function ViewClosure1() {
 
         let cate = evt.newCate;
         setCategory(cate);
-       
 
         let date1 = format(startDate, "yyyy-MM-dd");
         let date2 = format(endDate, "yyyy-MM-dd");
@@ -232,14 +238,15 @@ function ViewClosure1() {
         axios.get(`${base_url}/get_cls_by_Quarterly?empid=${d1}&category=${d2}`)
             .then(
                 json => setClosureList(json.data),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
             })
         console.log(JSON.stringify(closureList));
     }
-
     // ---------------------------------------------End Get data by category-------------------------------------------
 
     // --------------------------------------------Get data between dates----------------------------------------------
@@ -279,10 +286,12 @@ function ViewClosure1() {
         axios.get(`${base_url}/get_cls_byDate?empid=${f}&date1=${f1}&date2=${f2}`)
             .then(
                 json => setClosureList(json.data),
+                setIsDownload(true),
             )
             .catch(error => {
                 setIsShownError(true);
                 setClosureList([]);
+                setIsDownload(false);
             })
         console.log(JSON.stringify(closureList));
     }
@@ -301,6 +310,24 @@ function ViewClosure1() {
         );
     }
     // ---------------------------------------------Render table code--------------------------------------------------  
+
+    // ---------------------------------------------Function to show-hide calender-------------------------------------
+    function Download() {
+
+        return (
+            <div className="d-inline-flex w-50" >
+                <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-warning btn-sm dropdown-toggle" style={{ width: '135px' }}>
+                    <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
+                    <option value="ExportToPDF">Export to pdf</option>
+                    <option value="ExportToCSV">Export to csv</option>
+                </select>
+            </div>
+        );
+    }
+    // ---------------------------------------------Render table code--------------------------------------------------  
+
+
+
     // ---------------------------Empty Data Error Msg-----------------------------------------------------------
     function EmptyDataErrorMsg() {
         // console.log("Empty list");
@@ -484,7 +511,7 @@ function ViewClosure1() {
                                 }
                             </select>
                         </div>
-                        
+
                         {/* call Calender to select date */}
                         {isShown && <Box />}
                     </div>
@@ -509,25 +536,21 @@ function ViewClosure1() {
                             {renderTable()}
 
                         </tbody>
-           
+
                     </Table>
                     <div className="row">
                         <div className="col-10">
-                    {isShownError && <EmptyDataErrorMsg />}
-                   </div>
-                         <div className="col-2">
-                        <select name="category" onChange={(evt) => handleDownload({ DownloadOpt: evt.target.value })} className="btn btn-warning btn-sm dropdown-toggle" style={{ width: '135px' }}>
-                                <option hidden value=""><button>Download <i className="fa fa-download"></i></button></option>
-                                <option value="ExportToPDF">Export to pdf</option>
-                                <option value="ExportToCSV">Export to csv</option>
-                            </select>
-                            </div>
+                            {isShownError && <EmptyDataErrorMsg />}
+                        </div>
+                        <div className="col-2">
+                            {isDownload && <Download />}
+                        </div>
+                    </div>
                 </div>
-                </div>
-                
+
             </div>
         </div>
-        
+
         //)
     ) : (
         history.push("/"),
