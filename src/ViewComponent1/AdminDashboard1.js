@@ -35,7 +35,7 @@ const AdminDash1 = () => {
     const [category, setCategory] = useState();
     const [isShown, setIsShown] = useState(false);
     const [isShownError, setIsShownError] = useState(false);
-    const [isDownload, setIsDownload] = useState(false);
+    const [isDownload, setIsDownload] = useState(true);
     const [dt1, setDt1] = useState(new Date());
 
     const [inEditMode, setInEditMode,] = useState({
@@ -48,14 +48,12 @@ const AdminDash1 = () => {
     const [first, setFirst] = useState(null);
     const [second, setSecond] = useState(null);
     const [closure, setClosure] = useState(null);
-     const [dowload, setDownload] = useState(null);
-
-      
-    localStorage.setItem("cate",category);
+  
+    localStorage.setItem("cate", category);
     let date1 = format(startDate, "dd-MMM-yyyy");
     let date2 = format(endDate, "dd-MMM-yyyy");
-    localStorage.setItem("startdate",date1);
-    localStorage.setItem("enddate",date2);
+    localStorage.setItem("startdate", date1);
+    localStorage.setItem("enddate", date2);
 
     useEffect(() => {
         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
@@ -148,7 +146,7 @@ const AdminDash1 = () => {
 
     const handleCate = (evt) => {
 
-        console.log(closureList);
+       // console.log(closureList);
         let cate = evt.newCate;
         let eID = empIDD;
         setCategory(cate)
@@ -334,8 +332,7 @@ const AdminDash1 = () => {
         if (d_cate == "ExportToCSV") {
             //ExportToExcel(closureList);
             Excel(closureList)
-            Excel1(closureList)
-             // setDownload("")
+           
         } else {
             GeneratePDF(closureList);
              ///setDownload("")
@@ -483,7 +480,7 @@ const AdminDash1 = () => {
                 let date1 = format(startDate, "yyyy-MM-dd");
                 let date2 = format(endDate, "yyyy-MM-dd");
 
-                if (cate == undefined && eID != null) {
+               /* if (cate == undefined && eID != null) {
                     if (eID == "all") {
                         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
                         console.log("OK")
@@ -513,7 +510,45 @@ const AdminDash1 = () => {
                 else {
                     postGetDataByCate(cate);
                     setIsShown(false);
+                }*/
+
+                if (cate == undefined && eID != null) {
+                    if (eID == "all") {
+                        axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
+
+                    } else {
+                        postGetDataByEmpID(eID);//get_cls_id
+                    }
                 }
+                else if (cate == 'Customize' && eID == null) {
+                    setIsShown(true);
+                    // alert("startDate: " + date1 + " endDate: " + date2);
+                    postGetDataBetDates2(date1, date2);
+                }
+                else if (cate == 'Customize' && eID != null && eID != "all") {
+                    setIsShown(true);
+                    // alert("startDate: " + date1 + " endDate: " + date2 + " eID: " + eID);
+                    postGetDataBetDates(eID, date1, date2);
+                }
+                else if (eID != null && eID != "all") {
+                    postGetDataByCateOfEmp(eID, cate);
+                    setIsShown(false);
+                }
+                else if (cate == 'Customize' && eID == "all") {
+                    setIsShown(true);
+                }
+                else if (cate == undefined && eID == null) {
+                    // setIsShown(true);
+                    fetchInventory();
+                }
+                else {
+                    postGetDataByCate(cate);
+                    setIsShown(false);
+                }
+
+
+
+
             },
             (error) => {
                 alert("Operation Failed Here");

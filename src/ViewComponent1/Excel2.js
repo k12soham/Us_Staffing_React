@@ -10,7 +10,9 @@ const Excel2 = (excelData) => {
 
     const headings = [[
         "Sr No.", "Requirement", "Submission", "First", "Second", "Closure", "Date"
+    
     ]];
+    
     const wb = utils.book_new();
     const ws = utils.json_to_sheet([]);
 
@@ -23,15 +25,16 @@ const Excel2 = (excelData) => {
     // ];
     ws["!merges"] = merge;
 
-    ws['A2'] = {
-        font: {
-            name: 'arial',
-            sz: 24,
-            bold: true,
-            color: "#F2F2F2"
-        },
-    }
+    // ws['A2'] = {
+    //     font: {
+    //         name: 'arial',
+    //         sz: 24,
+    //         bold: true,
+    //         color: "#F2F2F2"
+    //     },
+    // }
 
+    
     console.log(excelData);
     const data = [];
     let ticketData1 = [];
@@ -65,6 +68,7 @@ const Excel2 = (excelData) => {
     excelData.forEach(exc => {
 
         ticketData1 = [
+        
             index++,
             exc.requirement,
             exc.submission,
@@ -73,14 +77,16 @@ const Excel2 = (excelData) => {
             exc.closure,
             exc.clo_date,
         ];
+        
         data.push(ticketData1)
     });
 
+
     XLSX.utils.sheet_add_aoa(ws, title, { origin: 'C2', skipHeader: true});    
     // , style={font: {sz: "24", bold: true}}
-    utils.sheet_add_aoa(ws, headings, { origin: 'C5', skipHeader: true });
-    utils.sheet_add_json(ws, data, { origin: 'C6', skipHeader: true });
-    utils.book_append_sheet(wb, ws, 'Report1');
+    utils.sheet_add_aoa(ws, headings, { origin: 'C4', skipHeader: true });
+    utils.sheet_add_json(ws, data, { origin: 'C5', skipHeader: true });
+    utils.book_append_sheet(wb, ws, 'Report1',);
     XLSX.writeFile(wb, 'Closure report.xlsx');
 }
 export default Excel2; 
