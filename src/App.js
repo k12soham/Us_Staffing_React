@@ -22,6 +22,7 @@ import CompareNumbers from './ExtraComponent/CompareNumbers';
 import ExportToExcel2 from './ExtraComponent/ExportToExcel2';
 import ExportToExcel from './ExtraComponent/PdfDemo1';
 import GeneratePDF from './ViewComponent1/GeneratePDF';
+import BarChart from './ViewComponent1/BarChart';
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           {/* <Route path="/forgot_pass1" element={<Forgetpassword />}></Route> */}
           <Route path="/export_excel2" element={<ExportToExcel2 />}></Route>
           <Route path="/export_to" element={<ExportToExcel />}></Route>
+          <Route path="/bar_chart" element={<BarChart />}></Route>
 
         </Routes>
       </Router>
