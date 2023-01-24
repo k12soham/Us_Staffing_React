@@ -24,7 +24,6 @@
     "mui-one-time-password-input": "^1.0.4",
     "react": "^18.2.0",
     "react-chart-histogram": "^0.2.4",
-    "react-chartjs-2": "^5.2.0",
     "react-data-export": "^0.6.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
