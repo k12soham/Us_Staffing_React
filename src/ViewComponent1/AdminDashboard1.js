@@ -19,6 +19,7 @@ import GeneratePDF from "./GeneratePDF";
 
 import { downloadExcel } from "react-export-table-to-excel";
 import Excel from "./Excel";
+import BarChart from "./BarChart";
 
 const AdminDash1 = () => {
 
@@ -364,20 +365,25 @@ const AdminDash1 = () => {
     }
 
     const updateInventory = ({ clsid, newReq, newSub, newFirst, newSecond, newClosure, newDate }) => {
+        let req = parseInt(newReq );
+        let sub = parseInt(newSub);
+        let first = parseInt(newFirst );
+        let second = parseInt(newSecond );
+        let closure = parseInt(newClosure );
 
-        if ((newSub < 0) || (newFirst < 0) || (newSecond < 0) || (newClosure < 0)) {
+        if ((sub < 0) || (first < 0) || (second < 0) || (closure < 0)) {
             alert("Please enter positive numbers")
         }
-        else if (newReq < 1) {
+        else if (req < 1) {
             alert("Atleast one requirement is needed")
         }
-        else if (newSub < newFirst) {
+        else if (sub < first) {
             alert("Please enter valid number for first interview")
         }
-        else if (newFirst < newSecond) {
+        else if (first < second) {
             alert("Please enter valid number for second interview")
         }
-        else if (newSecond < newClosure) {
+        else if (second < closure) {
             alert("Please enter valid number for closure")
         }
         else {
@@ -727,6 +733,13 @@ const AdminDash1 = () => {
                     <EmpTeamSidebar />
                 </div>
                 <div className="col-10 scroll-bar">
+
+                <div className="row">
+                    <div className="col-12" >
+                    {/* <BarChart/> */}
+                    </div>
+                </div>
+
                     <div className="row" style={{ marginBottom: '10px', marginTop: '10px' }}>
 
                         <div className="col-2" style={{ marginRight: '0px' }}>

@@ -85,8 +85,13 @@ function ViewClosure1() {
     }
 
     const updateInventory = ({ clsid, newReq, newSub, newFirst, newSecond, newClosure }) => {
+        let req = parseInt(newReq );
+        let sub = parseInt(newSub);
+        let first = parseInt(newFirst );
+        let second = parseInt(newSecond );
+        let closure = parseInt(newClosure );
 
-        if ((newSub < 0) || (newFirst < 0) || (newSecond < 0) || (newClosure < 0)) {
+        if ((sub < 0) || (first < 0) || (second < 0) || (closure < 0)) {
             alert("Please enter positive numbers")
         }
         else if (newSub < newFirst) {
