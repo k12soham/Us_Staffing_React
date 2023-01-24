@@ -143,7 +143,6 @@ const AdminDash1 = () => {
     // -------------------------------Get Records by empid and category---------------------------------------------
 
     // ---------------------------Code to handle Categories {Customize, Yearly... etc}-----------------------
-
     const handleCate = (evt) => {
 
        // console.log(closureList);
