@@ -20,6 +20,8 @@ import GeneratePDF from "./GeneratePDF";
 import { downloadExcel } from "react-export-table-to-excel";
 import Excel from "./Excel";
 import BarChart from "./BarChart";
+import HistogramChart from "./HistogramChart";
+import Chart1GFG from "./Chart1GFG";
 
 const AdminDash1 = () => {
 
@@ -551,9 +553,6 @@ const AdminDash1 = () => {
                     setIsShown(false);
                 }
 
-
-
-
             },
             (error) => {
                 alert("Operation Failed Here");
@@ -567,7 +566,6 @@ const AdminDash1 = () => {
         return closureList.map(cls => {
 
             var dd = new Date(cls.clo_date);
-            // console.log("Employees closure list  ash : ", JSON.stringify(closureList.length));
 
             return (
 
@@ -737,6 +735,8 @@ const AdminDash1 = () => {
                 <div className="row">
                     <div className="col-12" >
                     {/* <BarChart/> */}
+                    {/* <HistogramChart /> */}
+                    <Chart1GFG />
                     </div>
                 </div>
 
