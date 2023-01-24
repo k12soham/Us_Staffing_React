@@ -38,12 +38,11 @@ const Excel = (excelData) => {
     console.log(empname);
     let a = new Date();
     let currentdate = format(a, "dd-MMM-yyyy");
-    const cate = localStorage.getItem("cate");
-    console.log("category : "+cate);
+    let cate = localStorage.getItem("cate");
     let title = [["Closure Report"]];
     let dates = {};
 
-    if (cate == undefined) {
+    if (cate == 'undefined') {
         title = [[empname + "'s Current Month Closures Report"]];
     }
     else if (cate == 'allcat') {

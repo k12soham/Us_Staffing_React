@@ -26,7 +26,7 @@ function ViewClosure1() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [isShownError, setIsShownError] = useState(false);
-    const [isDownload, setIsDownload] = useState(false);
+    const [isDownload, setIsDownload] = useState(true);
 
     const [inEditMode, setInEditMode,] = useState({
         status: true,
@@ -196,11 +196,24 @@ function ViewClosure1() {
                 let date1 = format(startDate, "yyyy-MM-dd");
                 let date2 = format(endDate, "yyyy-MM-dd");
 
-                if (cate == 'Customize') {
+               /* if (cate == 'Customize') {
                     setIsShown(true);
                     postGetDataBetDates(empID, date1, date2);
                 }
                 else {
+                    postGetDataByCate(empID, cate);
+                    setIsShown(false);
+                }*/
+
+                if (cate == 'Customize') {
+                    setIsShown(true);
+                    postGetDataBetDates(empID, date1, date2);
+                }
+                else if (cate == undefined) {
+                    // postGetDataByCate(empID, cate);
+                    fetchInventory();
+                    setIsShown(false);
+                } else {
                     postGetDataByCate(empID, cate);
                     setIsShown(false);
                 }
