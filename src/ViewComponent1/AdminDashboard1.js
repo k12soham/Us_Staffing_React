@@ -20,6 +20,7 @@ import GeneratePDF from "./GeneratePDF";
 import { downloadExcel } from "react-export-table-to-excel";
 import Excel from "./Excel";
 import Histogram from 'react-chart-histogram';
+import { fontSize, style } from "@mui/system";
 
 const AdminDash1 = () => {
 
@@ -52,26 +53,26 @@ const AdminDash1 = () => {
 
 
     const labels = ['Requirement', 'Submission', '1st Interview','2nd Interview','closure'];
-
+    
  
     let a,b,c,d,e,sumA=0,sumB=0,sumC=0,sumD=0,sumE=0;
      closureList.map(cls => {
 
+        a=cls.requirement;
+        b=cls.submission;
+        c=cls.first;
+        d=cls.second;
+        e=cls.closure;
 
-a=cls.requirement;
-b=cls.submission;
-c=cls.first;
-d=cls.second;
-e=cls.closure;
-
-sumA=sumA+a;
-sumB=sumB+b;
-sumC=sumC+c;
-sumD=sumD+d;
-sumE=sumE+e;
+        sumA=sumA+a;
+        sumB=sumB+b;
+        sumC=sumC+c;
+        sumD=sumD+d;
+        sumE=sumE+e;
 });
   const data = [sumA,sumB,sumC,sumD,sumE];
-  const options = { fillColor: 'cyan', strokeColor: '#0000FF' };
+  const options = { fillColor: 'cyan', strokeColor: '#0000FF',    title: 'Frames' ,
+  hAxis: { title: 'Probabilidade' }, };
 
     localStorage.setItem("cate", category);
     let date1 = format(startDate, "dd-MMM-yyyy");
@@ -83,7 +84,7 @@ sumE=sumE+e;
         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/getEmpList_TM`).then(json => setEmployee(json.data))
     }, []);
-    // console.log(closureList);
+ 
     // -------------------------------Get Records by empid and category---------------------------------------------
 
     const handleChange = (e) => {
@@ -140,7 +141,7 @@ sumE=sumE+e;
         }
         else {
             setIsShownError(false)
-            // postGetDataByEmpCate(t2, t3);
+        
             postGetDataByCateOfEmp(t2, t3);
         }
     };
@@ -169,7 +170,7 @@ sumE=sumE+e;
     // ---------------------------Code to handle Categories {Customize, Yearly... etc}-----------------------
     const handleCate = (evt) => {
 
-       // console.log(closureList);
+     
         let cate = evt.newCate;
         let eID = empIDD;
         setCategory(cate)
@@ -185,7 +186,7 @@ sumE=sumE+e;
         else if (cate == 'Customize' && eID != null && eID != "all") {
             setIsShownError(false)
             setIsShown(true);
-            // alert("startDate: " + date1 + " endDate: " + date2 + " eID: " + eID);
+          
             postGetDataBetDates(eID, date1, date2);
         }
         else if (eID != null && eID != "all") {
@@ -286,7 +287,7 @@ sumE=sumE+e;
     }
 
     const postGetDataBetDates = (f, f1, f2) => {
-        // alert("this method is called f: "+ f+ " f1 ; "+f1+ " f2 :"+f2);
+      
         // axios.get(`${base_url}/get_cls_byDate?empid=${f}&date1=${f1}&date2=${f2}`).then(json => setClosureList(json.data))
         axios.get(`${base_url}/get_cls_byDate?empid=${f}&date1=${f1}&date2=${f2}`)
             .then(
@@ -350,22 +351,21 @@ sumE=sumE+e;
 
         let d_cate = evt.DownloadOpt;
         console.log(d_cate);
-      //  setDownload(d_cate)
+
      
         if (d_cate == "ExportToCSV") {
-            //ExportToExcel(closureList);
+ 
             Excel(closureList)
            
         } else {
             GeneratePDF(closureList);
-             ///setDownload("")
+           
         }
     }
 
     // ---------------------------End Handle Download Opt------------------------------------------------------------
     // ---------------------------Empty Data Error Msg-----------------------------------------------------------
     function EmptyDataErrorMsg() {
-        // console.log("Empty list");
         return (
             <div className="d-inline-flex w-50" >
                 <h5> No data Found</h5>
@@ -424,7 +424,7 @@ sumE=sumE+e;
                     //------------------------------------------------------------------------------------------------
                     let cate = category;
                     let eID = empIDD;
-                    // alert("cate : "+ cate+" eID: "+eID);
+     
 
                     let date1 = format(startDate, "yyyy-MM-dd");
                     let date2 = format(endDate, "yyyy-MM-dd");
@@ -434,17 +434,17 @@ sumE=sumE+e;
                             axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
 
                         } else {
-                            postGetDataByEmpID(eID);//get_cls_id
+                            postGetDataByEmpID(eID);
                         }
                     }
                     else if (cate == 'Customize' && eID == null) {
                         setIsShown(true);
-                        // alert("startDate: " + date1 + " endDate: " + date2);
+         
                         postGetDataBetDates2(date1, date2);
                     }
                     else if (cate == 'Customize' && eID != null && eID != "all") {
                         setIsShown(true);
-                        // alert("startDate: " + date1 + " endDate: " + date2 + " eID: " + eID);
+                  
                         postGetDataBetDates(eID, date1, date2);
                     }
                     else if (eID != null && eID != "all") {
@@ -455,14 +455,14 @@ sumE=sumE+e;
                         setIsShown(true);
                     }
                     else if (cate == undefined && eID == null) {
-                        // setIsShown(true);
+                   
                         fetchInventory();
                     }
                     else {
                         postGetDataByCate(cate);
                         setIsShown(false);
                     }
-                    // fetchInventory();
+                 
                 },
                     (error) => {
                         alert("Enter valid number for all requirements");
@@ -503,42 +503,11 @@ sumE=sumE+e;
                 //------------------------------------------------------------------------------------------------
                 let cate = category;
                 let eID = empIDD;
-                // alert("cate : "+ cate+" eID: "+eID);
 
                 let date1 = format(startDate, "yyyy-MM-dd");
                 let date2 = format(endDate, "yyyy-MM-dd");
 
-               /* if (cate == undefined && eID != null) {
-                    if (eID == "all") {
-                        axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
-                        console.log("OK")
-                    } else {
-                        postGetDataByEmpID(eID);
-                    }
-                }
-                else if (cate == 'Customize' && eID == null) {
-                    setIsShown(true);
-                    postGetDataBetDates2(date1, date2);
-                }
-                else if (cate == 'Customize' && eID != null && eID != "all") {
-                    setIsShown(true);
-                    // alert("startDate: " + date1 + " endDate: " + date2 + " eID: " + eID);
-                    postGetDataBetDates(eID, date1, date2);
-                }
-                else if (eID != null && eID != "all") {
-                    postGetDataByCateOfEmp(eID, cate);
-                    setIsShown(false);
-                }
-                else if (cate == 'Customize' && eID == "all") {
-                    setIsShown(true);
-                }
-                else if (cate == undefined) {
-                    fetchInventory();
-                }
-                else {
-                    postGetDataByCate(cate);
-                    setIsShown(false);
-                }*/
+               
 
                 if (cate == undefined && eID != null) {
                     if (eID == "all") {
@@ -550,12 +519,12 @@ sumE=sumE+e;
                 }
                 else if (cate == 'Customize' && eID == null) {
                     setIsShown(true);
-                    // alert("startDate: " + date1 + " endDate: " + date2);
+              
                     postGetDataBetDates2(date1, date2);
                 }
                 else if (cate == 'Customize' && eID != null && eID != "all") {
                     setIsShown(true);
-                    // alert("startDate: " + date1 + " endDate: " + date2 + " eID: " + eID);
+                 
                     postGetDataBetDates(eID, date1, date2);
                 }
                 else if (eID != null && eID != "all") {
@@ -566,7 +535,7 @@ sumE=sumE+e;
                     setIsShown(true);
                 }
                 else if (cate == undefined && eID == null) {
-                    // setIsShown(true);
+                 
                     fetchInventory();
                 }
                 else {
@@ -590,7 +559,7 @@ sumE=sumE+e;
         return closureList.map(cls => {
 
             var dd = new Date(cls.clo_date);
-            // console.log("Employees closure list  ash : ", JSON.stringify(closureList.length));
+            
 
             return (
 
@@ -668,7 +637,7 @@ sumE=sumE+e;
                         }
 
                     </td>
-                    {/* <td>{cls.clo_date}</td> */}
+                  
                     <td>
                         {
                             inEditMode.status && inEditMode.rowKey === cls.closureid ? (
@@ -676,7 +645,7 @@ sumE=sumE+e;
                                 <DatePicker maxDate={new Date()} value={dt1}
                                     className="datepicker"
                                     openToDate={dd}
-                                    // onChange={(event) => setDt1(event)}
+                                 
                                     onSelect={(date) => { datechange({ d: date }) }}
                                 />
                             ) : (
@@ -757,11 +726,7 @@ sumE=sumE+e;
                 </div>
                 <div className="col-10 scroll-bar">
 
-                <div className="row">
-                    <div className="col-12" >
-                    {/* <BarChart/> */}
-                    </div>
-                </div>
+             
 
                     <div className="row" style={{ marginBottom: '10px', marginTop: '10px' }}>
 
@@ -789,20 +754,21 @@ sumE=sumE+e;
                                 <option value="all">All Employee</option>
                                 {
                                     employee.map((emp) => (
-                                        // console.log("issue list : " + JSON.stringify(emp));
+                                       
                                         <option value={emp.empid}>{emp.emp_name}</option>
                                     ))
                                 }
                             </select>
-                            <div>
-      <Histogram
-          xLabels={labels}
-          yValues={data}
-          width='500'
-          height='200'
-          options={options}
-      />
-    </div>
+                            <div> <br></br>
+                            <Histogram
+                                xLabels={labels}
+                                yValues={data}
+                                width='500'
+                                height='200'
+                                
+                                options={options}
+                            />
+                            </div>
                         </div>
                         <div className="col-2"></div>
                         {isShown && <Box />}
@@ -811,7 +777,7 @@ sumE=sumE+e;
                     </div>
 
                     <Table bordered className="css-serial">
-                        {/* //Your Table in post changed to table to make it work */}
+                       
                         <thead>
                             <tr>
                                 <th>Sr No.</th>
@@ -844,7 +810,6 @@ sumE=sumE+e;
 
                 </div>
             </div>
-            {/* <NotificationContainer /> */}
         </div>
     ) : (
         history.push("/"),
