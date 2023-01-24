@@ -19,6 +19,7 @@ import GeneratePDF from "./GeneratePDF";
 
 import { downloadExcel } from "react-export-table-to-excel";
 import Excel from "./Excel";
+import Histogram from 'react-chart-histogram';
 
 const AdminDash1 = () => {
 
@@ -48,7 +49,30 @@ const AdminDash1 = () => {
     const [first, setFirst] = useState(null);
     const [second, setSecond] = useState(null);
     const [closure, setClosure] = useState(null);
-  
+
+
+    const labels = ['Requirement', 'Submission', '1st Interview','2nd Interview','closure'];
+
+ 
+    let a,b,c,d,e,sumA=0,sumB=0,sumC=0,sumD=0,sumE=0;
+     closureList.map(cls => {
+
+
+a=cls.requirement;
+b=cls.submission;
+c=cls.first;
+d=cls.second;
+e=cls.closure;
+
+sumA=sumA+a;
+sumB=sumB+b;
+sumC=sumC+c;
+sumD=sumD+d;
+sumE=sumE+e;
+});
+  const data = [sumA,sumB,sumC,sumD,sumE];
+  const options = { fillColor: 'cyan', strokeColor: '#0000FF' };
+
     localStorage.setItem("cate", category);
     let date1 = format(startDate, "dd-MMM-yyyy");
     let date2 = format(endDate, "dd-MMM-yyyy");
@@ -759,6 +783,15 @@ const AdminDash1 = () => {
                                     ))
                                 }
                             </select>
+                            <div>
+      <Histogram
+          xLabels={labels}
+          yValues={data}
+          width='500'
+          height='200'
+          options={options}
+      />
+    </div>
                         </div>
                         <div className="col-2"></div>
                         {isShown && <Box />}
