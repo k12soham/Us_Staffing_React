@@ -20,7 +20,6 @@ import Excel2 from "./Excel2";
 function ViewClosure1() {
 
     let empID = localStorage.getItem('empID');
-
     const [closureList, setClosureList] = useState([]);
 
     const [employee, setEmployee] = useState([]);

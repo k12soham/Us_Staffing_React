@@ -25,6 +25,7 @@ const AdminDash1 = () => {
     let empID = localStorage.getItem('empID');
 
     let empMail = localStorage.getItem('empMail');
+   
 
     const [closureList, setClosureList] = useState([]);
     const [employee, setEmployee] = useState([]);
@@ -34,7 +35,7 @@ const AdminDash1 = () => {
     const [category, setCategory] = useState();
     const [isShown, setIsShown] = useState(false);
     const [isShownError, setIsShownError] = useState(false);
-    const [isDownload, setIsDownload] = useState(false);
+    const [isDownload, setIsDownload] = useState(true);
     const [dt1, setDt1] = useState(new Date());
 
     const [inEditMode, setInEditMode,] = useState({
@@ -47,6 +48,12 @@ const AdminDash1 = () => {
     const [first, setFirst] = useState(null);
     const [second, setSecond] = useState(null);
     const [closure, setClosure] = useState(null);
+
+    localStorage.setItem("cate", category);
+    let date1 = format(startDate, "dd-MMM-yyyy");
+    let date2 = format(endDate, "dd-MMM-yyyy");
+    localStorage.setItem("startdate", date1);
+    localStorage.setItem("enddate", date2);
 
     useEffect(() => {
         axios.get(`${base_url}/CurMonthAll`).then(json => setClosureList(json.data))
@@ -136,7 +143,6 @@ const AdminDash1 = () => {
     // -------------------------------Get Records by empid and category---------------------------------------------
 
     // ---------------------------Code to handle Categories {Customize, Yearly... etc}-----------------------
-
     const handleCate = (evt) => {
 
         console.log(closureList);

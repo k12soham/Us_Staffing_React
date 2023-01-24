@@ -39,6 +39,7 @@ const Excel = (excelData) => {
     let a = new Date();
     let currentdate = format(a, "dd-MMM-yyyy");
     const cate = localStorage.getItem("cate");
+    console.log("category : "+cate);
     let title = [["Closure Report"]];
     let dates = {};
 
