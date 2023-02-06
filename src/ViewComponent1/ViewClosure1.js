@@ -527,7 +527,17 @@ function ViewClosure1() {
                                     </>
                                 }
                             </select>
-                        </div>
+                            </div><br></br>
+                            <div className="col-8"> <br></br>
+                            <Histogram 
+                                xLabels={labels}
+                                yValues={data}
+                                width='500'
+                                height='200'
+                                options={options}
+                            />
+                            </div>
+                    
 
                         {/* call Calender to select date */}
                         {isShown && <Box />}
